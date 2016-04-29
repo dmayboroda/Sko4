@@ -17,6 +17,7 @@ import com.chanel.view.StateViewSwitcher;
 import com.sko4.BuildConfig;
 import com.sko4.MainActivity;
 import com.sko4.R;
+import com.sko4.RxUtil;
 import com.sko4.api.ApiService;
 import com.sko4.api.EventsToList;
 import com.sko4.di.DaggerEventsComponent;
@@ -131,9 +132,7 @@ public class ItemsListView extends RelativeLayout implements ItemsAdapter.Choose
     private final Func1<Integer, Observable<EventsWrapper>> EVENTS = new Func1<Integer, Observable<EventsWrapper>>() {
         @Override
         public Observable<EventsWrapper> call(Integer limit) {
-            return api.getEvents(limit)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+            return RxUtil.applySchedulers(api.getEvents(limit))
                     .doOnError(ERROR)
                     .onErrorResumeNext(Observable.<EventsWrapper>empty());
         }
