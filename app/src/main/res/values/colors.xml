@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="window_background">#bebebe</color>
+    <color name="primaryDark">#4f4f4f</color>
+    <color name="primary">#ffffff</color>
+    <color name="accent">#ff6633</color>
+    <color name="semi_primary">#99bebebe</color>
+    <color name="semi_card">#99000000</color>
+    <color name="item_empty">#bebebe</color>
+    <color name="item_pressed">#90bebebe</color>
+    <color name="tint_card">#30000000</color>
+    <color name="bg_color">#ffffff</color>
+    <color name="plus_color">#666666</color>
+</resources>
