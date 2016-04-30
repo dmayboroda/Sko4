@@ -26,9 +26,6 @@ public final class EventsToList implements Func1<EventsWrapper, List<Bindable>> 
 
     @Override
     public List<Bindable> call(EventsWrapper eventsWrapper) {
-        List<Event> events = eventsWrapper.getEvents();
-        List<Bindable> binds = new ArrayList<>(events.size());
-        binds.addAll(events);
-        return binds;
+        return new ArrayList<Bindable>(eventsWrapper.getEvents());
     }
 }
