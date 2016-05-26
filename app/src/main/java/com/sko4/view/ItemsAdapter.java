@@ -1,6 +1,7 @@
 package com.sko4.view;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,11 @@ import com.sko4.Utils;
 import com.sko4.model.Bindable;
 import com.squareup.picasso.Picasso;
 
+import org.joda.time.DateTime;
+
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -69,15 +73,19 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
         @Bind(R.id.item_plus)    TextView plus;
         @Bind(R.id.item_name)    TextView name;
         @Bind(R.id.item_cost)    TextView cost;
+        @Bind(R.id.item_month)   TextView month;
+        @Bind(R.id.item_day)     TextView day;
 
         private View itemView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            name.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_CON_LIGHT));
-            plus.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_MEDIUM));
-            cost.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_THIN));
+            name.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_LIGHT));
+            plus.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_THIN));
+            cost.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_CON_LIGHT));
+            month.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_MEDIUM));
+            day.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_BLACK));
             this.itemView = itemView;
         }
 
@@ -90,9 +98,27 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
             });
             name.setText(bindable.getName());
             plus.setText(bindable.getVendor());
-            cost.setText(bindable.getPrice());
+
+            if (TextUtils.isEmpty(bindable.getPrice())) {
+                cost.setVisibility(View.GONE);
+            } else {
+                cost.setText(bindable.getPrice());
+                cost.setVisibility(View.VISIBLE);
+            }
             picasso.load(bindable.getUrl())
                     .into(preview);
+            DateTime time = bindable.getDate();
+            if (time != null) {
+                month.setVisibility(View.VISIBLE);
+                day.setVisibility(View.VISIBLE);
+                String monthStr = time.toString("MMM", Locale.US);
+                int dayNum = time.getDayOfMonth();
+                month.setText(monthStr.toUpperCase());
+                day.setText(String.valueOf(dayNum));
+            } else {
+                month.setVisibility(View.GONE);
+                day.setVisibility(View.GONE);
+            }
         }
 
     }

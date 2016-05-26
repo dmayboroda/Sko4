@@ -2,6 +2,7 @@ package com.sko4.view;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -9,7 +10,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chanel.component.AppComponent;
@@ -33,10 +33,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
 
@@ -44,7 +42,9 @@ import rx.subscriptions.CompositeSubscription;
  * Events view.
  * Created by Mayboroda.
  */
-public class ItemsListView extends RelativeLayout implements ItemsAdapter.Chooser {
+public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Chooser {
+
+    public static final String TAG = ItemsListView.class.getSimpleName();
 
     public static final int ITEMS_COUNT = 1000;
 
@@ -75,7 +75,7 @@ public class ItemsListView extends RelativeLayout implements ItemsAdapter.Choose
                                                       Uri uri,
                                                       Exception exception) {
                             if (BuildConfig.DEBUG && !TextUtils.isEmpty(uri.toString())) {
-                                Log.e("Sko4", uri.toString());
+                                Log.e(TAG, uri.toString());
                             }
                         }
                     }))
@@ -89,6 +89,7 @@ public class ItemsListView extends RelativeLayout implements ItemsAdapter.Choose
         super.onFinishInflate();
         ButterKnife.bind(this);
 
+        ((MainActivity)getContext()).setSupportActionBar(toolbar);
         errorView.setText(getContext().getText(R.string.error_nothing));
         progressBar.setIndeterminateDrawable(new IndeterminateProgressDrawable(getContext()));
         switcher.setDisplayedChildId(R.id.progress);
@@ -108,7 +109,7 @@ public class ItemsListView extends RelativeLayout implements ItemsAdapter.Choose
     }
 
     @Override
-    protected void onAttachedToWindow() {
+    public void onAttachedToWindow() {
         super.onAttachedToWindow();
         subscriptions.add(limitSubject
             .flatMap(EVENTS)
@@ -121,7 +122,7 @@ public class ItemsListView extends RelativeLayout implements ItemsAdapter.Choose
     }
 
     @Override
-    protected void onDetachedFromWindow() {
+    public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         if (!subscriptions.isUnsubscribed()) {
             subscriptions.unsubscribe();

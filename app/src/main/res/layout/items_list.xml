@@ -1,4 +1,5 @@
 <com.sko4.view.ItemsListView
+    android:id="@+id/coordinator"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,27 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--?attr/actionBarSize-->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_height="72dp"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:background="?attr/colorPrimary"
-        android:elevation="8dp"
-        android:fitsSystemWindows="true"
-        android:layout_alignParentTop="true"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        >
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/logo_android"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            />
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_height="72dp"
+            android:layout_width="match_parent"
+            android:background="?attr/colorPrimary"
+            android:elevation="8dp"
+            android:fitsSystemWindows="true"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_scrollFlags="scroll|enterAlways"
+            >
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/logo_android"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <com.chanel.view.StateViewSwitcher
         android:id="@+id/switcher"
@@ -34,7 +41,7 @@
         android:layout_height="match_parent"
         android:inAnimation="@android:anim/fade_in"
         android:outAnimation="@android:anim/fade_out"
-        android:layout_below="@+id/toolbar"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
         <ProgressBar
@@ -62,6 +69,7 @@
             android:id="@+id/items_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
     </com.chanel.view.StateViewSwitcher>
 </com.sko4.view.ItemsListView>

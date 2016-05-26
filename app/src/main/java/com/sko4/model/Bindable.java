@@ -1,5 +1,7 @@
 package com.sko4.model;
 
+import org.joda.time.DateTime;
+
 /**
  * Bindable interface for view.
  * Created by Mayboroda.
@@ -7,11 +9,10 @@ package com.sko4.model;
 public interface Bindable {
 
     String getName();
-    String getPlus();
+    String getStyles();
     String getUrl();
     String getId();
-    String getEndDate();
-    String getStartDate();
     String getVendor();
     String getPrice();
+    DateTime getDate();
 }

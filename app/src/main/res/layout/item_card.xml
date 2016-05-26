@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="245dp"
     android:layout_marginBottom="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginLeft="10dp"
@@ -24,7 +24,7 @@
         <ImageView
             android:id="@+id/item_preview"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="185dp"
             android:scaleType="centerCrop"
             android:tint="@color/tint_card"
             android:background="@android:color/transparent"
@@ -32,17 +32,63 @@
             />
 
         <TextView
-            android:id="@+id/item_name"
+            android:id="@+id/item_day"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:layout_alignLeft="@+id/item_month"
+            android:gravity="center"
+            android:textSize="35sp"
+            android:textColor="@color/primary"
+            android:shadowColor="@color/semi_card"
+            android:shadowDx="2"
+            android:shadowRadius="2"
+            android:background="@color/item_pressed"
+            />
+
+
+        <TextView
+            android:id="@+id/item_month"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_day"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="3dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/primary"
+            android:shadowColor="@color/primaryDark"
+            android:shadowDx="2"
+            android:shadowRadius="2"
+            android:background="@color/accent"
+            />
+
+        <View
+            android:id="@+id/item_separator"
             android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/accent"
+            android:layout_below="@+id/item_preview"
+            />
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_preview"
-            android:textSize="27sp"
+            android:textSize="23sp"
             android:textColor="@color/accent"
             android:paddingTop="2dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:maxLines="1"
             android:ellipsize="end"
+            android:shadowColor="@color/item_pressed"
+            android:shadowDx="3"
+            android:shadowRadius="3"
             />
 
         <TextView
@@ -50,32 +96,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_name"
-            android:textSize="17sp"
-            android:textColor="@color/plus_color"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:textSize="18sp"
+            android:textColor="@color/semi_card"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:maxLines="1"
             android:ellipsize="end"
+            android:shadowColor="@color/primaryDark"
+            android:shadowDx="2"
+            android:shadowRadius="2"
             />
 
         <TextView
             android:id="@+id/item_cost"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignBaseline="@+id/item_plus"
             android:textSize="17sp"
-            android:textColor="@color/plus_color"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:maxEms="1"
-            android:ellipsize="end"
-            android:layout_toRightOf="@id/item_plus"
-            android:layout_alignBaseline="@id/item_plus"
+            android:textColor="@color/item_pressed"
+            android:background="@color/primary"
+            android:maxLines="1"
+            android:shadowColor="@color/semi_card"
+            android:shadowDx="1"
+            android:shadowRadius="1"
             />
 
     </RelativeLayout>
-
 </android.support.v7.widget.CardView>

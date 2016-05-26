@@ -1,6 +1,11 @@
 package com.sko4.model;
 
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
+
+import org.joda.time.DateTime;
 
 import java.util.List;
 
@@ -20,45 +25,37 @@ public class Event implements Bindable {
     private String file;
     @SerializedName("title")
     private String title;
-    @SerializedName("desc")
-    private String desc;
-    @SerializedName("id_sc_track")
-    private String soundcloud;
-    @SerializedName("id_type")
-    private String type;
-    @SerializedName("id_status")
-    private String status;
     @SerializedName("city")
     private String city;
     @SerializedName("idt_city")
     private String idtCity;
     @SerializedName("idt_country")
     private String idtCountry;
-    @SerializedName("country_code")
-    private String countryCode;
-    @SerializedName("is_finished")
-    private int isFinished;
-    @SerializedName("days_to")
-    private int daysTo;
-    @SerializedName("start_date")
-    private String startDate;
-    @SerializedName("finish_date")
-    private String finishtDate;
     @SerializedName("prices")
     private List<Price> prices;
-    @SerializedName("artists")
-    private List<Artist> artists;
     @SerializedName("styles")
     private List<Style> styles;
     @SerializedName("venues")
     private List<Venue> venues;
+    @SerializedName("start_date")
+    private String date;
+
+    @Nullable
+    public DateTime getDate() {
+        DateTime dateTime = null;
+        if (!TextUtils.isEmpty(date)) {
+            dateTime = DateTime.parse(date);
+        }
+        return dateTime;
+    }
+
+    public void setDate(String date) { this.date = date; }
 
     @Override
     public String getName() { return title; }
 
-    @Override
-    public String getPlus() {
-        List<Style> types = getStyles();
+    public String getStyles() {
+        List<Style> types = getStylesList();
         if (types == null || types.isEmpty()) { return ""; }
         StringBuilder builder = new StringBuilder();
         for (Style style : types) {
@@ -83,16 +80,6 @@ public class Event implements Bindable {
     public String getId() { return id; }
 
     @Override
-    public String getEndDate() {
-        return finishtDate;
-    }
-
-    @Override
-    public String getStartDate() {
-        return startDate;
-    }
-
-    @Override
     public String getVendor() {
         StringBuilder builder = new StringBuilder();
         if (venues != null && !venues.isEmpty()) {
@@ -110,19 +97,28 @@ public class Event implements Bindable {
     public String getPrice() {
         StringBuilder builder = new StringBuilder();
         if (prices != null && !prices.isEmpty()) {
-            for (Price price : prices) {
-                if (builder.length() > 0) {
-                    builder.append(", ");
-                }
-                if (price.getPrice().equals("0.00")) {
-                    builder.append("Free");
-                } else {
-                    builder.append(price.getPrice());
-                }
-                builder.append(price.getSymbol());
+            if (prices.size() > 1) {
+                Price first = prices.get(0);
+                setupPrice(builder, first);
+                builder.append(" - ");
+                int lastIdx = prices.size() - 1;
+                Price last = prices.get(lastIdx);
+                setupPrice(builder, last);
+            } else {
+                setupPrice(builder, prices.get(0));
             }
         }
         return builder.toString();
+    }
+
+    private void setupPrice(StringBuilder builder, Price price){
+        if (price.getPrice().equals("0.00")) {
+            builder.append("Free");
+        } else {
+            builder.append(price.getPrice());
+        }
+        builder.append(" ");
+        builder.append(price.getSymbol());
     }
 
     public void setId(String id) {
@@ -161,37 +157,6 @@ public class Event implements Bindable {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public String getSoundcloud() {
-        return soundcloud;
-    }
-
-    public void setSoundcloud(String soundcloud) {
-        this.soundcloud = soundcloud;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public String getCity() {
         return city;
@@ -217,30 +182,6 @@ public class Event implements Bindable {
         this.idtCountry = idtCountry;
     }
 
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-    public int getIsFinished() {
-        return isFinished;
-    }
-
-    public void setIsFinished(int isFinished) {
-        this.isFinished = isFinished;
-    }
-
-    public int getDaysTo() {
-        return daysTo;
-    }
-
-    public void setDaysTo(int daysTo) {
-        this.daysTo = daysTo;
-    }
-
     public List<Price> getPrices() {
         return prices;
     }
@@ -249,15 +190,7 @@ public class Event implements Bindable {
         this.prices = prices;
     }
 
-    public List<Artist> getArtists() {
-        return artists;
-    }
-
-    public void setArtists(List<Artist> artists) {
-        this.artists = artists;
-    }
-
-    public List<Style> getStyles() {
+    public List<Style> getStylesList() {
         return styles;
     }
 

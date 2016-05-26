@@ -2,5 +2,7 @@
 <resources>
         <style name="Theme.Base" parent="AppTheme">
                 <item name="android:windowTranslucentStatus">true</item>
+                <item name="android:colorControlHighlight">@color/item_pressed</item> 
+                <item name="android:windowSharedElementsUseOverlay">false</item>
         </style>
 </resources>
