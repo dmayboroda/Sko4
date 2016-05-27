@@ -14,7 +14,7 @@ import rx.Observable;
 public interface ApiService {
 
     @GET("/api")
-    Observable<EventsWrapper> getEvents(@Query("limit") int limit);
+    Observable<EventsWrapper> getEvents(@Query("id_city") String city);
 
     @GET("/filters")
     Observable<Filters> getFilters();

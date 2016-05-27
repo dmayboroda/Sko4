@@ -41,9 +41,6 @@
             android:gravity="center"
             android:textSize="35sp"
             android:textColor="@color/primary"
-            android:shadowColor="@color/semi_card"
-            android:shadowDx="2"
-            android:shadowRadius="2"
             android:background="@color/item_pressed"
             />
 
@@ -55,24 +52,14 @@
             android:layout_below="@+id/item_day"
             android:layout_marginLeft="10dp"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:paddingRight="10dp"
             android:paddingBottom="3dp"
             android:gravity="center"
             android:textSize="12sp"
             android:textColor="@color/primary"
-            android:shadowColor="@color/primaryDark"
-            android:shadowDx="2"
-            android:shadowRadius="2"
             android:background="@color/accent"
             />
 
-        <View
-            android:id="@+id/item_separator"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/accent"
-            android:layout_below="@+id/item_preview"
-            />
 
         <TextView
             android:id="@+id/item_name"
@@ -82,13 +69,11 @@
             android:textSize="23sp"
             android:textColor="@color/accent"
             android:paddingTop="2dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="13dp"
             android:paddingRight="10dp"
             android:maxLines="1"
             android:ellipsize="end"
             android:shadowColor="@color/item_pressed"
-            android:shadowDx="3"
-            android:shadowRadius="3"
             />
 
         <TextView
@@ -102,9 +87,7 @@
             android:paddingRight="10dp"
             android:maxLines="1"
             android:ellipsize="end"
-            android:shadowColor="@color/primaryDark"
-            android:shadowDx="2"
-            android:shadowRadius="2"
+            android:drawableLeft="@drawable/ic_room_black_18dp"
             />
 
         <TextView
@@ -114,15 +97,12 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="8dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="12dp"
             android:layout_alignBaseline="@+id/item_plus"
             android:textSize="17sp"
-            android:textColor="@color/item_pressed"
+            android:textColor="@color/semi_card"
             android:background="@color/primary"
             android:maxLines="1"
-            android:shadowColor="@color/semi_card"
-            android:shadowDx="1"
-            android:shadowRadius="1"
             />
 
     </RelativeLayout>

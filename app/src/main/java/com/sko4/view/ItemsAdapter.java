@@ -81,10 +81,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            name.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_LIGHT));
-            plus.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_THIN));
+            name.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_CON_LIGHT));
+            plus.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_CON_LIGHT));
             cost.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_CON_LIGHT));
-            month.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_MEDIUM));
+            month.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_LIGHT));
             day.setTypeface(Utils.typeface(itemView.getContext(), Utils.ROBOTO_BLACK));
             this.itemView = itemView;
         }
@@ -97,7 +97,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
                 }
             });
             name.setText(bindable.getName());
-            plus.setText(bindable.getVendor());
+            if (TextUtils.isEmpty(bindable.getVendor())) {
+                plus.setVisibility(View.GONE);
+            } else {
+                plus.setVisibility(View.VISIBLE);
+                plus.setText(bindable.getVendor());
+            }
 
             if (TextUtils.isEmpty(bindable.getPrice())) {
                 cost.setVisibility(View.GONE);

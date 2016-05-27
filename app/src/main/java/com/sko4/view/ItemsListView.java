@@ -46,10 +46,10 @@ public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Cho
 
     public static final String TAG = ItemsListView.class.getSimpleName();
 
-    public static final int ITEMS_COUNT = 1000;
+    public static final String CITY_ID = "49713";
 
     private final CompositeSubscription subscriptions = new CompositeSubscription();
-    private final PublishSubject<Integer> limitSubject = PublishSubject.create();
+    private final PublishSubject<String> limitSubject = PublishSubject.create();
 
     @Inject ApiService api;
     @Inject Picasso picasso;
@@ -118,7 +118,7 @@ public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Cho
         if (switcher.getDisplayedChildId() != R.id.progress) {
             switcher.setDisplayedChildId(R.id.progress);
         }
-        limitSubject.onNext(ITEMS_COUNT);
+        limitSubject.onNext(CITY_ID);
     }
 
     @Override
@@ -130,10 +130,10 @@ public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Cho
     }
 
 
-    private final Func1<Integer, Observable<EventsWrapper>> EVENTS = new Func1<Integer, Observable<EventsWrapper>>() {
+    private final Func1<String, Observable<EventsWrapper>> EVENTS = new Func1<String, Observable<EventsWrapper>>() {
         @Override
-        public Observable<EventsWrapper> call(Integer limit) {
-            return RxUtil.applySchedulers(api.getEvents(limit))
+        public Observable<EventsWrapper> call(String city) {
+            return RxUtil.applySchedulers(api.getEvents(city))
                     .doOnError(ERROR)
                     .onErrorResumeNext(Observable.<EventsWrapper>empty());
         }
