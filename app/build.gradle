@@ -32,4 +32,5 @@ dependencies {
     compile 'net.danlew:android.joda:2.9.3.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     apt "com.google.dagger:dagger-compiler:2.0.2"
+    compile group: 'javax.validation', name: 'validation-api', version: '1.0.0.GA'
 }
