@@ -10,16 +10,10 @@ public class Price {
 
     @SerializedName("id")
     private String id;
-    @SerializedName("id_event")
-    private String eventId;
-    @SerializedName("id_currency_code")
-    private String currencyCode;
     @SerializedName("title")
     private String title;
     @SerializedName("price")
     private String price;
-    @SerializedName("code")
-    private String code;
     @SerializedName("symbol")
     private String symbol;
     @SerializedName("name")
@@ -31,22 +25,6 @@ public class Price {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(String eventId) {
-        this.eventId = eventId;
-    }
-
-    public String getCurrencyCode() {
-        return currencyCode;
-    }
-
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
     }
 
     public String getTitle() {
@@ -63,14 +41,6 @@ public class Price {
 
     public void setPrice(String price) {
         this.price = price;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getSymbol() {

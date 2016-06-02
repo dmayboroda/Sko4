@@ -3,18 +3,21 @@ package com.sko4.view;
 import android.content.Context;
 import android.net.Uri;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.chanel.component.AppComponent;
 import com.chanel.view.StateViewSwitcher;
 import com.sko4.BuildConfig;
+import com.sko4.EventDetailsActivity;
 import com.sko4.MainActivity;
 import com.sko4.R;
 import com.sko4.RxUtil;
@@ -46,7 +49,8 @@ public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Cho
 
     public static final String TAG = ItemsListView.class.getSimpleName();
 
-    public static final String CITY_ID = "49713";
+    public static final int EXTRA_SPACE = 300;
+    public static final String CITY_ID  = "49713";
 
     private final CompositeSubscription subscriptions = new CompositeSubscription();
     private final PublishSubject<String> limitSubject = PublishSubject.create();
@@ -104,7 +108,12 @@ public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Cho
                                 : R.id.items_recycler);
             }
         });
-        itemsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        itemsList.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            protected int getExtraLayoutSpace(RecyclerView.State state) {
+                return EXTRA_SPACE;
+            }
+        });
         itemsList.setAdapter(adapter);
     }
 
@@ -149,8 +158,9 @@ public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Cho
 
 
     @Override
-    public void onChoose(Bindable bindable) {
-
+    public void onChoose(View view, Bindable bindable) {
+        EventDetailsActivity.navigate((AppCompatActivity) getContext(),
+                view.findViewById(R.id.item_preview), bindable);
     }
 
 }

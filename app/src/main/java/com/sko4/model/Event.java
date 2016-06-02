@@ -17,8 +17,6 @@ public class Event implements Bindable {
 
     @SerializedName("id")
     private String id;
-    @SerializedName("idt")
-    private String idt;
     @SerializedName("path")
     private String path;
     @SerializedName("file_name")
@@ -27,10 +25,6 @@ public class Event implements Bindable {
     private String title;
     @SerializedName("city")
     private String city;
-    @SerializedName("idt_city")
-    private String idtCity;
-    @SerializedName("idt_country")
-    private String idtCountry;
     @SerializedName("prices")
     private List<Price> prices;
     @SerializedName("styles")
@@ -125,14 +119,6 @@ public class Event implements Bindable {
         this.id = id;
     }
 
-    public String getIdt() {
-        return idt;
-    }
-
-    public void setIdt(String idt) {
-        this.idt = idt;
-    }
-
     public String getPath() {
         return path;
     }
@@ -164,26 +150,6 @@ public class Event implements Bindable {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getIdtCity() {
-        return idtCity;
-    }
-
-    public void setIdtCity(String idtCity) {
-        this.idtCity = idtCity;
-    }
-
-    public String getIdtCountry() {
-        return idtCountry;
-    }
-
-    public void setIdtCountry(String idtCountry) {
-        this.idtCountry = idtCountry;
-    }
-
-    public List<Price> getPrices() {
-        return prices;
     }
 
     public void setPrices(List<Price> prices) {

@@ -31,7 +31,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
         implements Action1<List<Bindable>> {
 
     public interface Chooser {
-        void onChoose(Bindable bindable);
+        void onChoose(View view, Bindable bindable);
     }
 
     private List<Bindable> items = Collections.emptyList();
@@ -93,7 +93,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    chooser.onChoose(bindable);
+                    chooser.onChoose(v, bindable);
                 }
             });
             name.setText(bindable.getName());
