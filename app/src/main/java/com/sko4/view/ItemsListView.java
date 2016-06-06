@@ -152,15 +152,13 @@ public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Cho
         @Override
         public void call(Throwable throwable) {
             switcher.setDisplayedChildId(R.id.error_message);
-            errorView.setText(throwable.getMessage());
         }
     };
 
 
     @Override
     public void onChoose(View view, Bindable bindable) {
-        EventDetailsActivity.navigate((AppCompatActivity) getContext(),
-                view.findViewById(R.id.item_preview), bindable);
+        EventDetailsActivity.navigate((AppCompatActivity) getContext(), view, bindable);
     }
 
 }

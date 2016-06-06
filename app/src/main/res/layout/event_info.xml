@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sko4.view.EventInfo
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/event_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    card_view:cardBackgroundColor="@color/bg_color"
+    card_view:cardElevation="8dp"
+    android:clickable="true"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/event_fb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/semi_card"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_title_black_18dp"
+            android:clickable="true"
+            android:text="@string/facebook"
+            />
+
+
+        <TextView
+            android:id="@+id/event_web"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/semi_card"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:padding="10dp"
+            android:text="@string/web"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_link_black_18dp"
+            android:clickable="true"
+            />
+
+        <TextView
+            android:id="@+id/event_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/semi_card"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_schedule_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/event_prices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/semi_card"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_local_offer_black_18dp"
+            />
+
+    </LinearLayout>
+
+</com.sko4.view.EventInfo>

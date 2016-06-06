@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Sko4</string>
     <string name="error_nothing">Nothing to show :(</string>
+
+    <string name="facebook">Мероприятие на facebook</string>
+    <string name="web">Страница мероприятия</string>
+    <string name="tickets">Купить билет</string>
+
+    <string name="free">Свободный</string>
+
+    <!-- DEBUG KEY-->
+    <string name="map_key">AIzaSyCSrLG7vt2KC1OjNRt-yLeQ8tPKzZndPug</string>
 </resources>

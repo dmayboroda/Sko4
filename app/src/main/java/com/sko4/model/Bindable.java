@@ -14,5 +14,6 @@ public interface Bindable {
     String getId();
     String getVendor();
     String getPrice();
-    DateTime getDate();
+    DateTime getStartDate();
+    DateTime getFinishDate();
 }

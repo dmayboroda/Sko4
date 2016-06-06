@@ -28,11 +28,4 @@ public final class Utils {
         return Typeface.createFromAsset(context.getAssets(), name);
     }
 
-    public static boolean checkConnection(Context context) {
-        ConnectivityManager connectivityManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isConnectedOrConnecting();
-    }
-
 }

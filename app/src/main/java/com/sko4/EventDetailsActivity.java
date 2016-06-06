@@ -1,8 +1,6 @@
 package com.sko4;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +10,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -50,7 +48,6 @@ public class EventDetailsActivity extends BaseActivity {
         ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle());
     }
 
-
     @Bind(R.id.app_bar_layout)      AppBarLayout appBarLayout;
     @Bind(R.id.collapsing_toolbar)  CollapsingToolbarLayout toolbarLayout;
     @Bind(R.id.toolbar)             Toolbar toolbar;
@@ -65,6 +62,8 @@ public class EventDetailsActivity extends BaseActivity {
             getWindow().setEnterTransition(slide);
             getWindow().setReturnTransition(slide);
         }
+        final String title = getIntent().getStringExtra(TITLE_EXTRA);
+        final String url   = getIntent().getStringExtra(IMAGE_EXTRA);
         setContentView(R.layout.event_layout);
         ButterKnife.bind(this);
         ViewCompat.setTransitionName(appBarLayout, IMAGE_EXTRA);
@@ -72,24 +71,16 @@ public class EventDetailsActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String title = getIntent().getStringExtra(TITLE_EXTRA);
-        String url   = getIntent().getStringExtra(IMAGE_EXTRA);
+        int primaryDark = getResources().getColor(R.color.primaryDark);
+        int primary = getResources().getColor(R.color.primary);
         toolbarLayout.setTitle(title);
-        toolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+        toolbarLayout.setExpandedTitleColor(primary);
+        toolbarLayout.setContentScrimColor(primary);
+        toolbarLayout.setStatusBarScrimColor(primaryDark);
         Picasso.with(this).load(url).into(image, new Callback() {
             @Override
             public void onSuccess() {
-                Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-                    @Override
-                    public void onGenerated(Palette palette) {
-                        int primaryDark = getResources().getColor(R.color.primaryDark);
-                        int primary = getResources().getColor(R.color.primary);
-                        toolbarLayout.setContentScrimColor(palette.getMutedColor(primary));
-                        toolbarLayout.setStatusBarScrimColor(palette.getDarkMutedColor(primaryDark));
-                        supportStartPostponedEnterTransition();
-                    }
-                });
+                supportStartPostponedEnterTransition();
             }
 
             @Override
@@ -99,6 +90,19 @@ public class EventDetailsActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    public String getId() {
+        return getIntent().getStringExtra(ID_EXTRA);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent motionEvent) {
+        try {
+            return super.dispatchTouchEvent(motionEvent);
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 
 }

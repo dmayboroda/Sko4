@@ -32,18 +32,37 @@ public class Event implements Bindable {
     @SerializedName("venues")
     private List<Venue> venues;
     @SerializedName("start_date")
-    private String date;
+    private String startDate;
+    @SerializedName("finish_date")
+    private String finishDate;
+    @SerializedName("url")
+    private String url;
+    @SerializedName("facebook")
+    private String facebook;
+    @SerializedName("url_buy_tickets")
+    private String tickets;
+    @SerializedName("maps")
+    private List<MapInfo> mapInfo;
+    @SerializedName("seo_desc")
+    private String body;
 
     @Nullable
-    public DateTime getDate() {
+    public DateTime getStartDate() {
         DateTime dateTime = null;
-        if (!TextUtils.isEmpty(date)) {
-            dateTime = DateTime.parse(date);
+        if (!TextUtils.isEmpty(startDate)) {
+            dateTime = DateTime.parse(startDate);
         }
         return dateTime;
     }
 
-    public void setDate(String date) { this.date = date; }
+    @Override
+    public DateTime getFinishDate() {
+        DateTime dateTime = null;
+        if (!TextUtils.isEmpty(finishDate)) {
+            dateTime = DateTime.parse(finishDate);
+        }
+        return dateTime;
+    }
 
     @Override
     public String getName() { return title; }
@@ -105,6 +124,12 @@ public class Event implements Bindable {
         return builder.toString();
     }
 
+    public String getFacebook() { return facebook; }
+
+    public String getTickets() { return tickets; }
+
+    public String getWeb() { return url; }
+
     private void setupPrice(StringBuilder builder, Price price){
         if (price.getPrice().equals("0.00")) {
             builder.append("Free");
@@ -115,16 +140,20 @@ public class Event implements Bindable {
         builder.append(price.getSymbol());
     }
 
+    public boolean isInfoDisable() {
+        return TextUtils.isEmpty(facebook)
+                && TextUtils.isEmpty(url)
+                && TextUtils.isEmpty(getPrice())
+                && startDate == null
+                && finishDate == null;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
 
     public String getPath() {
         return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public String getFile() {
@@ -143,32 +172,11 @@ public class Event implements Bindable {
         this.title = title;
     }
 
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setPrices(List<Price> prices) {
-        this.prices = prices;
-    }
-
     public List<Style> getStylesList() {
         return styles;
     }
 
-    public void setStyles(List<Style> styles) {
-        this.styles = styles;
-    }
+    public List<MapInfo> getMapInfo() { return mapInfo; }
 
-    public List<Venue> getVenues() {
-        return venues;
-    }
-
-    public void setVenues(List<Venue> venues) {
-        this.venues = venues;
-    }
+    public String getBody() { return body; }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<com.sko4.view.EventView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/event_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -33,7 +34,6 @@
                 android:elevation="8dp"
                 android:scaleType="centerCrop"
                 android:tint="@color/tint_card"
-                android:background="@android:color/transparent"
                 android:tintMode="src_atop"
                 android:fitsSystemWindows="true"
                 app:layout_collapseMode="parallax"
@@ -42,7 +42,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
+                android:layout_height="?attr/actionBarSize"
                 android:elevation="8dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_collapseMode="pin"
@@ -50,4 +50,67 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-</android.support.design.widget.CoordinatorLayout>
+    <com.chanel.view.StateViewSwitcher
+        android:id="@+id/event_switcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inAnimation="@android:anim/fade_in"
+        android:outAnimation="@android:anim/fade_out"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <ProgressBar
+            android:id="@+id/event_progress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminate="true"
+            style="@style/Widget.MaterialProgressBar.ProgressBar"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            />
+
+        <TextView
+            android:id="@+id/event_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textColor="@color/accent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/event_scroll"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <include layout="@layout/event_info"/>
+
+                <include layout="@layout/maps_info"/>
+
+                <include layout="@layout/event_desc"/>
+
+                <!-- musicians -->
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </com.chanel.view.StateViewSwitcher>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/event_fab"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom|right|end"
+        style="@style/FabStyle"
+        />
+
+</com.sko4.view.EventView>

@@ -93,7 +93,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    chooser.onChoose(v, bindable);
+                    chooser.onChoose(preview, bindable);
                 }
             });
             name.setText(bindable.getName());
@@ -107,12 +107,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
             if (TextUtils.isEmpty(bindable.getPrice())) {
                 cost.setVisibility(View.GONE);
             } else {
-                cost.setText(bindable.getPrice());
+                String free = itemView.getResources().getString(R.string.free);
+                cost.setText(bindable.getPrice().replace("Free", free));
                 cost.setVisibility(View.VISIBLE);
             }
             picasso.load(bindable.getUrl())
                     .into(preview);
-            DateTime time = bindable.getDate();
+            DateTime time = bindable.getStartDate();
             if (time != null) {
                 month.setVisibility(View.VISIBLE);
                 day.setVisibility(View.VISIBLE);

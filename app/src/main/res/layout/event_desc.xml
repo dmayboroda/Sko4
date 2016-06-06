@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sko4.view.EventDesc
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/event_desc"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    card_view:cardBackgroundColor="@color/bg_color"
+    card_view:cardElevation="8dp"
+    android:clickable="true"
+    >
+
+    <TextView
+        android:id="@+id/event_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textColor="@color/semi_card"
+        android:maxLines="10"
+        android:ellipsize="end"
+        android:padding="10dp"
+        />
+
+</com.sko4.view.EventDesc>
