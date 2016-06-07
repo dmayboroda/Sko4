@@ -10,7 +10,7 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     card_view:cardBackgroundColor="@color/bg_color"
-    card_view:cardElevation="8dp"
+    card_view:cardElevation="3dp"
     android:clickable="true"
     >
 

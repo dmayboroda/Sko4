@@ -43,8 +43,10 @@ public class Event implements Bindable {
     private String tickets;
     @SerializedName("maps")
     private List<MapInfo> mapInfo;
-    @SerializedName("seo_desc")
+    @SerializedName("body")
     private String body;
+    @SerializedName("artists")
+    private List<Artist> artists;
 
     @Nullable
     public DateTime getStartDate() {
@@ -144,8 +146,24 @@ public class Event implements Bindable {
         return TextUtils.isEmpty(facebook)
                 && TextUtils.isEmpty(url)
                 && TextUtils.isEmpty(getPrice())
+                && TextUtils.isEmpty(getVenue())
                 && startDate == null
                 && finishDate == null;
+    }
+
+    @Nullable
+    public String getVenue() {
+        if (venues == null || venues.isEmpty()) { return null; }
+        StringBuilder builder = new StringBuilder();
+        for (Venue venue : venues) {
+            if (builder.length() > 0) {
+                builder.append(", ");
+            }
+            if (!TextUtils.isEmpty(venue.getName())) {
+                builder.append(venue.getName());
+            }
+        }
+        return builder.toString();
     }
 
     public void setId(String id) {
@@ -179,4 +197,6 @@ public class Event implements Bindable {
     public List<MapInfo> getMapInfo() { return mapInfo; }
 
     public String getBody() { return body; }
+
+    public List<Artist> getArtists() { return artists; }
 }

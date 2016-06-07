@@ -29,6 +29,7 @@ public class EventInfo extends CardView {
     @Bind(R.id.event_web)     TextView web;
     @Bind(R.id.event_fb)      TextView fb;
     @Bind(R.id.event_date)    TextView date;
+    @Bind(R.id.event_venue)   TextView venue;
 
     public EventInfo(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,6 +43,7 @@ public class EventInfo extends CardView {
         web.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
         fb.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
         date.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
+        venue.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
     public void bind(Event eventData) {
@@ -56,12 +58,20 @@ public class EventInfo extends CardView {
         String facebook = eventData.getFacebook();
         String url      = eventData.getWeb();
         String prices   = eventData.getPrice();
+        String venues   = eventData.getVenue();
 
         DateTime startDate  = eventData.getStartDate();
         DateTime finishDate = eventData.getFinishDate();
 
         String start  = startDate.toString("dd.MM.yyyy");
         String finish = finishDate.toString("dd.MM.yyyy");
+
+        if (!TextUtils.isEmpty(venues)) {
+            venue.setVisibility(VISIBLE);
+            venue.setText(venues);
+        } else {
+            venue.setVisibility(GONE);
+        }
 
         if (!TextUtils.isEmpty(facebook)) {
             fb.setVisibility(VISIBLE);

@@ -38,7 +38,10 @@ public class EventDesc extends CardView{
         if (TextUtils.isEmpty(body)) {
             setVisibility(GONE);
         } else {
-            desc.setText(Html.fromHtml(body.trim()));
+            desc.setText(Html.fromHtml(body
+                    .trim()
+                    .replace("&nbsp;", "")
+                    .replace("<p>&nbsp;</p>","")));
             setVisibility(VISIBLE);
         }
     }

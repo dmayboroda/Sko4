@@ -10,7 +10,7 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     card_view:cardBackgroundColor="@color/bg_color"
-    card_view:cardElevation="8dp"
+    card_view:cardElevation="3dp"
     android:clickable="true"
     >
 
@@ -24,7 +24,7 @@
             android:id="@+id/event_fb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:textColor="@color/semi_card"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -42,7 +42,7 @@
             android:id="@+id/event_web"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:textColor="@color/semi_card"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -59,7 +59,7 @@
             android:id="@+id/event_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/semi_card"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -74,7 +74,7 @@
             android:id="@+id/event_prices"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:textColor="@color/semi_card"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -83,6 +83,21 @@
             android:padding="10dp"
             android:drawablePadding="5dp"
             android:drawableLeft="@drawable/ic_local_offer_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/event_venue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textColor="@color/semi_card"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_room_black_18dp"
             />
 
     </LinearLayout>

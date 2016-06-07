@@ -59,6 +59,7 @@ public class EventView extends CoordinatorLayout implements Action1<EventData> {
     @Bind(R.id.event_map)       EventMap eventMap;
     @Bind(R.id.event_desc)      EventDesc eventDesc;
     @Bind(R.id.event_fab)       FloatingActionButton actionButton;
+    @Bind(R.id.artist_stack)    ArtistStack artistStack;
 
     public EventView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -137,6 +138,7 @@ public class EventView extends CoordinatorLayout implements Action1<EventData> {
         eventInfo.bind(event);
         eventMap.bind(event);
         eventDesc.bind(event);
+        artistStack.bind(event.getArtists(), picasso);
 
         String tickets = event.getTickets();
         if (TextUtils.isEmpty(tickets)) {

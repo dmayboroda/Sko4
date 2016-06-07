@@ -10,7 +10,7 @@
     android:layout_marginRight="10dp"
     android:foreground="@drawable/ripple_selector"
     card_view:cardBackgroundColor="@color/bg_color"
-    card_view:cardElevation="8dp"
+    card_view:cardElevation="3dp"
     android:clickable="true"
     >
 
@@ -27,8 +27,8 @@
             android:layout_height="185dp"
             android:scaleType="centerCrop"
             android:tint="@color/tint_card"
-            android:background="@android:color/transparent"
             android:tintMode="src_atop"
+            android:background="@android:color/transparent"
             />
 
         <TextView

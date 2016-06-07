@@ -71,12 +71,23 @@ public class EventDetailsActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        int primaryDark = getResources().getColor(R.color.primaryDark);
-        int primary = getResources().getColor(R.color.primary);
+        int primary = 0;
+        int primaryDark = 0;
+        int accent = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            primary = getResources().getColor(R.color.primary, null);
+            primaryDark = getResources().getColor(R.color.primaryDark, null);
+            accent = getResources().getColor(R.color.accent, null);
+        } else {
+            primary = getResources().getColor(R.color.primary);
+            primaryDark = getResources().getColor(R.color.primaryDark);
+            accent = getResources().getColor(R.color.accent);
+        }
         toolbarLayout.setTitle(title);
         toolbarLayout.setExpandedTitleColor(primary);
+        toolbarLayout.setCollapsedTitleTextColor(primaryDark);
         toolbarLayout.setContentScrimColor(primary);
-        toolbarLayout.setStatusBarScrimColor(primaryDark);
+        toolbarLayout.setStatusBarScrimColor(primary);
         Picasso.with(this).load(url).into(image, new Callback() {
             @Override
             public void onSuccess() {
