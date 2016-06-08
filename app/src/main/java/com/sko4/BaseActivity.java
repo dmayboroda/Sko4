@@ -2,7 +2,8 @@ package com.sko4;
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.chanel.component.AppComponent;
+import com.sko4.di.component.AppComponent;
+
 
 /**
  * Base activity with app component.

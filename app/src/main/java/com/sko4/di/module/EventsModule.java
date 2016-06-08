@@ -1,9 +1,9 @@
-package com.sko4.di;
+package com.sko4.di.module;
 
 import android.content.Context;
 
-import com.chanel.Cycles;
-import com.chanel.Lifecycle;
+import com.sko4.Cycles;
+import com.sko4.Lifecycle;
 import com.sko4.api.ApiService;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;

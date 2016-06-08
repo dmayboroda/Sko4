@@ -35,7 +35,7 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <com.chanel.view.StateViewSwitcher
+    <com.sko4.view.StateViewSwitcher
         android:id="@+id/switcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -71,5 +71,5 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
-    </com.chanel.view.StateViewSwitcher>
+    </com.sko4.view.StateViewSwitcher>
 </com.sko4.view.ItemsListView>

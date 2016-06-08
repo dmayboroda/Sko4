@@ -1,1 +1,1 @@
-include ':app', ':Chanel'
+include ':app'

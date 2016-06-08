@@ -1,8 +1,8 @@
-package com.sko4.di;
+package com.sko4.di.component;
 
-import com.chanel.Cycles;
-import com.chanel.Lifecycle;
-import com.chanel.component.AppComponent;
+import com.sko4.Cycles;
+import com.sko4.Lifecycle;
+import com.sko4.di.module.EventsModule;
 import com.sko4.view.EventView;
 import com.sko4.view.ItemsListView;
 

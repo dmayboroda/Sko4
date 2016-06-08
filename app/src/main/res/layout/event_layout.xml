@@ -49,7 +49,7 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-    <com.chanel.view.StateViewSwitcher
+    <com.sko4.view.StateViewSwitcher
         android:id="@+id/event_switcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -103,7 +103,7 @@
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
-    </com.chanel.view.StateViewSwitcher>
+    </com.sko4.view.StateViewSwitcher>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/event_fab"

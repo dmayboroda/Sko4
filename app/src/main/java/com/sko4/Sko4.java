@@ -2,10 +2,10 @@ package com.sko4;
 
 import android.app.Application;
 
-import com.chanel.component.AppComponent;
-import com.chanel.component.DaggerAppComponent;
-import com.chanel.module.ApiModule;
-import com.chanel.module.AppModule;
+import com.sko4.di.component.AppComponent;
+import com.sko4.di.component.DaggerAppComponent;
+import com.sko4.di.module.ApiModule;
+import com.sko4.di.module.AppModule;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
