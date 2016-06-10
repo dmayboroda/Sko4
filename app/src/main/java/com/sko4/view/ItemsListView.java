@@ -1,13 +1,13 @@
 package com.sko4.view;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.sko4.EventDetailsActivity;
+import com.sko4.MainActivity;
 import com.sko4.R;
 import com.sko4.api.ApiService;
 import com.sko4.model.Event;
@@ -23,7 +23,7 @@ import rx.Observable;
  * Events view.
  * Created by Mayboroda.
  */
-public class ItemsListView extends RxCoordinator<EventsWrapper> implements ItemsAdapter.Chooser {
+public class ItemsListView extends RxCoordinator<EventsWrapper, MainActivity> implements ItemsAdapter.Chooser {
 
     public static final int EXTRA_SPACE = 300;
     public static final String CITY_ID  = "49713";
@@ -82,6 +82,6 @@ public class ItemsListView extends RxCoordinator<EventsWrapper> implements Items
 
     @Override
     public void onChoose(View view, Event event) {
-        EventDetailsActivity.navigate((AppCompatActivity) getContext(), view, event);
+        EventDetailsActivity.navigate(getActivity(), view, event);
     }
 }

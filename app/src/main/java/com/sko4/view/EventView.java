@@ -25,7 +25,7 @@ import rx.Observable;
  * Event view.
  * Created by Mayboroda on 6/4/16.
  */
-public class EventView extends RxCoordinator<EventData> {
+public class EventView extends RxCoordinator<EventData, EventDetailsActivity> {
 
     @Inject Picasso picasso;
     @Inject ApiService apiService;
@@ -46,7 +46,7 @@ public class EventView extends RxCoordinator<EventData> {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        String id = ((EventDetailsActivity)getContext()).getId();
+        String id = getActivity().getId();
         eventSubject.onNext(id);
     }
 

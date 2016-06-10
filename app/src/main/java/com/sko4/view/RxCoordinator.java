@@ -27,7 +27,7 @@ import rx.subscriptions.CompositeSubscription;
  * Coordinator layout with rx components.
  * Created by Mayboroda on 6/10/16.
  */
-public abstract class RxCoordinator<T> extends CoordinatorLayout implements Action1<T>{
+public abstract class RxCoordinator<T, A extends BaseActivity> extends CoordinatorLayout implements Action1<T>{
 
     protected final CompositeSubscription subscriptions = new CompositeSubscription();
     protected final PublishSubject<String> eventSubject = PublishSubject.create();
@@ -41,14 +41,15 @@ public abstract class RxCoordinator<T> extends CoordinatorLayout implements Acti
     public RxCoordinator(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (!isInEditMode()) {
-            AppComponent appComponent = ((BaseActivity)context)
-                    .getAppComponent();
+            AppComponent appComponent = getActivity().getAppComponent();
             component = DaggerEventsComponent.builder()
                     .appComponent(appComponent)
                     .eventsModule(new EventsModule())
                     .build();
         }
     }
+
+    public A getActivity() { return ((A)getContext()); }
 
     @Override
     protected void onFinishInflate() {
