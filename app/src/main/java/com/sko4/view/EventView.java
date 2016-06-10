@@ -51,6 +51,13 @@ public class EventView extends RxCoordinator<EventData> {
     }
 
     @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        String id = ((EventDetailsActivity)getContext()).getId();
+        eventSubject.onNext(id);
+    }
+
+    @Override
     public Observable<EventData> createObservable(String value) {
         return apiService.getEventData(value);
     }
@@ -81,12 +88,6 @@ public class EventView extends RxCoordinator<EventData> {
                 switcher.setDisplayedChildId(R.id.event_scroll);
             }
         };
-    }
-
-    @Override
-    public void fetch() {
-        String id = ((EventDetailsActivity)getContext()).getId();
-        eventSubject.onNext(id);
     }
 
     @OnClick(R.id.event_fab)

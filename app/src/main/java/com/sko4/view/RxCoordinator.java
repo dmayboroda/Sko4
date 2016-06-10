@@ -83,7 +83,6 @@ public abstract class RxCoordinator<T> extends CoordinatorLayout{
         if (switcher.getDisplayedChildId() != R.id.progress) {
             switcher.setDisplayedChildId(R.id.progress);
         }
-        fetch();
     }
 
     @Override
@@ -97,9 +96,6 @@ public abstract class RxCoordinator<T> extends CoordinatorLayout{
     public abstract Observable<T> createObservable(String value);
 
     public abstract Action1<T> createAction();
-
-    public abstract void fetch();
-
 
     private Func1<String, Observable<T>> API_OBSERVER = new Func1<String, Observable<T>>() {
         @Override

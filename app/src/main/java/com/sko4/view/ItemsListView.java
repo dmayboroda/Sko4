@@ -68,17 +68,18 @@ public class ItemsListView extends RxCoordinator<EventsWrapper> implements Items
     }
 
     @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        eventSubject.onNext(CITY_ID);
+    }
+
+    @Override
     public Observable<EventsWrapper> createObservable(String value) {
         return api.getEvents(value);
     }
 
     @Override
     public Action1<EventsWrapper> createAction() { return adapter; }
-
-    @Override
-    public void fetch() {
-        eventSubject.onNext(CITY_ID);
-    }
 
     @Override
     public void onChoose(View view, Event event) {
