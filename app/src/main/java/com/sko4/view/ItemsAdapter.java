@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.sko4.R;
 import com.sko4.Utils;
-import com.sko4.model.Bindable;
+import com.sko4.model.Event;
+import com.sko4.model.EventsWrapper;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.DateTime;
@@ -28,13 +29,13 @@ import rx.functions.Action1;
  * Created by Mayboroda.
  */
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
-        implements Action1<List<Bindable>> {
+        implements Action1<EventsWrapper> {
 
     public interface Chooser {
-        void onChoose(View view, Bindable bindable);
+        void onChoose(View view, Event event);
     }
 
-    private List<Bindable> items = Collections.emptyList();
+    private List<Event> items = Collections.emptyList();
     private final Picasso picasso;
     private final Chooser chooser;
 
@@ -62,7 +63,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
     public long getItemId(int position) { return position; }
 
     @Override
-    public void call(List<Bindable> items) {
+    public void call(EventsWrapper wrapper) {
+        List<Event> items = wrapper.getEvents();
         this.items = items;
         notifyDataSetChanged();
     }
@@ -89,7 +91,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
             this.itemView = itemView;
         }
 
-        public void bind(final Bindable bindable) {
+        public void bind(final Event bindable) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

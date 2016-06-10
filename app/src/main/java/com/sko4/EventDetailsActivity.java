@@ -17,7 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.sko4.model.Bindable;
+import com.sko4.model.Event;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -38,11 +38,11 @@ public class EventDetailsActivity extends BaseActivity {
 
     public static void navigate(AppCompatActivity activity,
                                 View transitionImage,
-                                Bindable bindable) {
+                                Event event) {
         Intent intent = new Intent(activity, EventDetailsActivity.class);
-        intent.putExtra(IMAGE_EXTRA, bindable.getUrl());
-        intent.putExtra(TITLE_EXTRA, bindable.getName());
-        intent.putExtra(ID_EXTRA, bindable.getId());
+        intent.putExtra(IMAGE_EXTRA, event.getUrl());
+        intent.putExtra(TITLE_EXTRA, event.getName());
+        intent.putExtra(ID_EXTRA, event.getId());
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(activity, transitionImage, IMAGE_EXTRA);
         ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle());
@@ -73,15 +73,12 @@ public class EventDetailsActivity extends BaseActivity {
 
         int primary = 0;
         int primaryDark = 0;
-        int accent = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             primary = getResources().getColor(R.color.primary, null);
             primaryDark = getResources().getColor(R.color.primaryDark, null);
-            accent = getResources().getColor(R.color.accent, null);
         } else {
             primary = getResources().getColor(R.color.primary);
             primaryDark = getResources().getColor(R.color.primaryDark);
-            accent = getResources().getColor(R.color.accent);
         }
         toolbarLayout.setTitle(title);
         toolbarLayout.setExpandedTitleColor(primary);

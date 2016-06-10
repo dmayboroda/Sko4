@@ -1,31 +1,16 @@
 package com.sko4.view;
 
 import android.content.Context;
-import android.net.Uri;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.sko4.BuildConfig;
 import com.sko4.EventDetailsActivity;
-import com.sko4.MainActivity;
 import com.sko4.R;
-import com.sko4.RxUtil;
 import com.sko4.api.ApiService;
-import com.sko4.api.EventsToList;
-import com.sko4.di.component.AppComponent;
-import com.sko4.di.component.DaggerEventsComponent;
-import com.sko4.di.component.EventsComponent;
-import com.sko4.di.module.EventsModule;
-import com.sko4.model.Bindable;
+import com.sko4.model.Event;
 import com.sko4.model.EventsWrapper;
 import com.squareup.picasso.Picasso;
 
@@ -33,56 +18,28 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
 import rx.Observable;
 import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.subjects.PublishSubject;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Events view.
  * Created by Mayboroda.
  */
-public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Chooser {
-
-    public static final String TAG = ItemsListView.class.getSimpleName();
+public class ItemsListView extends RxCoordinator<EventsWrapper> implements ItemsAdapter.Chooser {
 
     public static final int EXTRA_SPACE = 300;
     public static final String CITY_ID  = "49713";
 
-    private final CompositeSubscription subscriptions = new CompositeSubscription();
-    private final PublishSubject<String> limitSubject = PublishSubject.create();
-
     @Inject ApiService api;
     @Inject Picasso picasso;
 
-    @Bind(R.id.progress)        ProgressBar progressBar;
-    @Bind(R.id.switcher)        StateViewSwitcher switcher;
-    @Bind(R.id.error_message)   TextView errorView;
     @Bind(R.id.items_recycler)  RecyclerView itemsList;
-    @Bind(R.id.toolbar)         Toolbar toolbar;
 
     private ItemsAdapter adapter;
 
     public ItemsListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (!isInEditMode()) {
-            AppComponent appComponent = ((MainActivity)context)
-                    .getAppComponent();
-            EventsComponent component = DaggerEventsComponent.builder()
-                    .appComponent(appComponent)
-                    .eventsModule(new EventsModule(new Picasso.Listener() {
-                        @Override
-                        public void onImageLoadFailed(Picasso picasso,
-                                                      Uri uri,
-                                                      Exception exception) {
-                            if (BuildConfig.DEBUG && !TextUtils.isEmpty(uri.toString())) {
-                                Log.e(TAG, uri.toString());
-                            }
-                        }
-                    }))
-                    .build();
             component.inject(this);
         }
     }
@@ -91,12 +48,6 @@ public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Cho
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
-
-        ((MainActivity)getContext()).setSupportActionBar(toolbar);
-        errorView.setText(getContext().getText(R.string.error_nothing));
-        progressBar.setIndeterminateDrawable(new IndeterminateProgressDrawable(getContext()));
-        switcher.setDisplayedChildId(R.id.progress);
-
         adapter = new ItemsAdapter(picasso, this);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -117,47 +68,21 @@ public class ItemsListView extends CoordinatorLayout implements ItemsAdapter.Cho
     }
 
     @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        subscriptions.add(limitSubject
-            .flatMap(EVENTS)
-            .map(EventsToList.instance())
-            .subscribe(adapter));
-        if (switcher.getDisplayedChildId() != R.id.progress) {
-            switcher.setDisplayedChildId(R.id.progress);
-        }
-        limitSubject.onNext(CITY_ID);
+    public Observable<EventsWrapper> createObservable(String value) {
+        return api.getEvents(value);
     }
 
     @Override
-    public void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        if (!subscriptions.isUnsubscribed()) {
-            subscriptions.unsubscribe();
-        }
-    }
-
-
-    private final Func1<String, Observable<EventsWrapper>> EVENTS = new Func1<String, Observable<EventsWrapper>>() {
-        @Override
-        public Observable<EventsWrapper> call(String city) {
-            return RxUtil.applySchedulers(api.getEvents(city))
-                    .doOnError(ERROR)
-                    .onErrorResumeNext(Observable.<EventsWrapper>empty());
-        }
-    };
-
-    private Action1<Throwable> ERROR = new Action1<Throwable>() {
-        @Override
-        public void call(Throwable throwable) {
-            switcher.setDisplayedChildId(R.id.error_message);
-        }
-    };
-
+    public Action1<EventsWrapper> createAction() { return adapter; }
 
     @Override
-    public void onChoose(View view, Bindable bindable) {
-        EventDetailsActivity.navigate((AppCompatActivity) getContext(), view, bindable);
+    public void fetch() {
+        eventSubject.onNext(CITY_ID);
+    }
+
+    @Override
+    public void onChoose(View view, Event event) {
+        EventDetailsActivity.navigate((AppCompatActivity) getContext(), view, event);
     }
 
 }

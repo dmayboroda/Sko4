@@ -13,7 +13,7 @@ import java.util.List;
  * Event model.
  * Created by Mayboroda.
  */
-public class Event implements Bindable {
+public class Event {
 
     @SerializedName("id")
     private String id;
@@ -57,7 +57,6 @@ public class Event implements Bindable {
         return dateTime;
     }
 
-    @Override
     public DateTime getFinishDate() {
         DateTime dateTime = null;
         if (!TextUtils.isEmpty(finishDate)) {
@@ -66,7 +65,6 @@ public class Event implements Bindable {
         return dateTime;
     }
 
-    @Override
     public String getName() { return title; }
 
     public String getStyles() {
@@ -82,7 +80,6 @@ public class Event implements Bindable {
         return builder.toString();
     }
 
-    @Override
     public String getUrl() {
         return "http://files.sko4.com"
                 + getPath()
@@ -91,10 +88,8 @@ public class Event implements Bindable {
                 + getFile();
     }
 
-    @Override
     public String getId() { return id; }
 
-    @Override
     public String getVendor() {
         StringBuilder builder = new StringBuilder();
         if (venues != null && !venues.isEmpty()) {
@@ -108,7 +103,6 @@ public class Event implements Bindable {
         return builder.toString();
     }
 
-    @Override
     public String getPrice() {
         StringBuilder builder = new StringBuilder();
         if (prices != null && !prices.isEmpty()) {

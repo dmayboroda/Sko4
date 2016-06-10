@@ -50,7 +50,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <com.sko4.view.StateViewSwitcher
-        android:id="@+id/event_switcher"
+        android:id="@+id/switcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:inAnimation="@android:anim/fade_in"
@@ -59,7 +59,7 @@
         >
 
         <ProgressBar
-            android:id="@+id/event_progress"
+            android:id="@+id/progress"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:indeterminate="true"
@@ -69,7 +69,7 @@
             />
 
         <TextView
-            android:id="@+id/event_error"
+            android:id="@+id/error_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
