@@ -20,13 +20,12 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 import rx.Observable;
-import rx.functions.Action1;
 
 /**
  * Event view.
  * Created by Mayboroda on 6/4/16.
  */
-public class EventView extends RxCoordinator<EventData> implements Action1<EventData>{
+public class EventView extends RxCoordinator<EventData> {
 
     @Inject Picasso picasso;
     @Inject ApiService apiService;
@@ -55,9 +54,6 @@ public class EventView extends RxCoordinator<EventData> implements Action1<Event
     public Observable<EventData> createObservable(String value) {
         return apiService.getEventData(value);
     }
-
-    @Override
-    public Action1<EventData> createAction() { return this; }
 
     @OnClick(R.id.event_fab)
     public void onActionButton(View view) {

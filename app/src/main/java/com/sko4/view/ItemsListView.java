@@ -18,7 +18,6 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observable;
-import rx.functions.Action1;
 
 /**
  * Events view.
@@ -66,6 +65,11 @@ public class ItemsListView extends RxCoordinator<EventsWrapper> implements Items
     }
 
     @Override
+    public void call(EventsWrapper wrapper) {
+        adapter.publish(wrapper);
+    }
+
+    @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         eventSubject.onNext(CITY_ID);
@@ -77,11 +81,7 @@ public class ItemsListView extends RxCoordinator<EventsWrapper> implements Items
     }
 
     @Override
-    public Action1<EventsWrapper> createAction() { return adapter; }
-
-    @Override
     public void onChoose(View view, Event event) {
         EventDetailsActivity.navigate((AppCompatActivity) getContext(), view, event);
     }
-
 }

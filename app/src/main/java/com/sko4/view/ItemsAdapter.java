@@ -22,14 +22,12 @@ import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 
 /**
  * Items adapter for bindable.
  * Created by Mayboroda.
  */
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
-        implements Action1<EventsWrapper> {
+public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
 
     public interface Chooser {
         void onChoose(View view, Event event);
@@ -62,8 +60,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>
     @Override
     public long getItemId(int position) { return position; }
 
-    @Override
-    public void call(EventsWrapper wrapper) {
+    public void publish(EventsWrapper wrapper) {
         List<Event> items = wrapper.getEvents();
         this.items = items;
         notifyDataSetChanged();

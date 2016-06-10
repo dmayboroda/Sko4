@@ -27,7 +27,7 @@ import rx.subscriptions.CompositeSubscription;
  * Coordinator layout with rx components.
  * Created by Mayboroda on 6/10/16.
  */
-public abstract class RxCoordinator<T> extends CoordinatorLayout{
+public abstract class RxCoordinator<T> extends CoordinatorLayout implements Action1<T>{
 
     protected final CompositeSubscription subscriptions = new CompositeSubscription();
     protected final PublishSubject<String> eventSubject = PublishSubject.create();
@@ -64,7 +64,7 @@ public abstract class RxCoordinator<T> extends CoordinatorLayout{
         super.onAttachedToWindow();
         subscriptions.add(eventSubject
                 .flatMap(API_OBSERVER)
-                .subscribe(createAction()));
+                .subscribe(this));
         if (switcher.getDisplayedChildId() != R.id.progress) {
             switcher.setDisplayedChildId(R.id.progress);
         }
@@ -79,8 +79,6 @@ public abstract class RxCoordinator<T> extends CoordinatorLayout{
     }
 
     public abstract Observable<T> createObservable(String value);
-
-    public abstract Action1<T> createAction();
 
     private Func1<String, Observable<T>> API_OBSERVER = new Func1<String, Observable<T>>() {
         @Override
