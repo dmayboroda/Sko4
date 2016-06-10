@@ -17,7 +17,6 @@ import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Observable;
 import rx.functions.Action1;
 
@@ -47,7 +46,6 @@ public class ItemsListView extends RxCoordinator<EventsWrapper> implements Items
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        ButterKnife.bind(this);
         adapter = new ItemsAdapter(picasso, this);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override

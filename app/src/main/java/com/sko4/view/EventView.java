@@ -45,11 +45,6 @@ public class EventView extends RxCoordinator<EventData> {
         }
     }
 
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        ButterKnife.bind(this);
-    }
-
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();

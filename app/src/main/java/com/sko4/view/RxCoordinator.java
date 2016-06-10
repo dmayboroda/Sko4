@@ -29,8 +29,6 @@ import rx.subscriptions.CompositeSubscription;
  */
 public abstract class RxCoordinator<T> extends CoordinatorLayout{
 
-    private static final String TAG = RxCoordinator.class.getSimpleName();
-
     protected final CompositeSubscription subscriptions = new CompositeSubscription();
     protected final PublishSubject<String> eventSubject = PublishSubject.create();
 
