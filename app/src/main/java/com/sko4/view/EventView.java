@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.functions.Action1;
@@ -27,7 +26,7 @@ import rx.functions.Action1;
  * Event view.
  * Created by Mayboroda on 6/4/16.
  */
-public class EventView extends RxCoordinator<EventData> {
+public class EventView extends RxCoordinator<EventData> implements Action1<EventData>{
 
     @Inject Picasso picasso;
     @Inject ApiService apiService;
@@ -58,37 +57,35 @@ public class EventView extends RxCoordinator<EventData> {
     }
 
     @Override
-    public Action1<EventData> createAction() {
-        return new Action1<EventData>() {
-            @Override
-            public void call(EventData eventData) {
-                Event event = eventData.getData();
-                if (event == null) {
-                    eventSubject.onError(new Throwable());
-                    return;
-                }
-                eventInfo.bind(event);
-                eventMap.bind(event);
-                eventDesc.bind(event);
-                artistStack.bind(event.getArtists(), picasso);
-
-                String tickets = event.getTickets();
-                if (TextUtils.isEmpty(tickets)) {
-                    actionButton.setVisibility(GONE);
-                } else {
-                    actionButton.setTag(tickets);
-                    actionButton.setVisibility(VISIBLE);
-                }
-
-                switcher.setDisplayedChildId(R.id.event_scroll);
-            }
-        };
-    }
+    public Action1<EventData> createAction() { return this; }
 
     @OnClick(R.id.event_fab)
     public void onActionButton(View view) {
         String tickets = (String) view.getTag();
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(tickets));
         getContext().startActivity(intent);
+    }
+
+    @Override
+    public void call(EventData eventData) {
+        Event event = eventData.getData();
+        if (event == null) {
+            eventSubject.onError(new Throwable());
+            return;
+        }
+        eventInfo.bind(event);
+        eventMap.bind(event);
+        eventDesc.bind(event);
+        artistStack.bind(event.getArtists(), picasso);
+
+        String tickets = event.getTickets();
+        if (TextUtils.isEmpty(tickets)) {
+            actionButton.setVisibility(GONE);
+        } else {
+            actionButton.setTag(tickets);
+            actionButton.setVisibility(VISIBLE);
+        }
+
+        switcher.setDisplayedChildId(R.id.event_scroll);
     }
 }
