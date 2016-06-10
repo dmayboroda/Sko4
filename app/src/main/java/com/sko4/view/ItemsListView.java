@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.sko4.EventDetailsActivity;
+import com.sko4.EventActivity;
 import com.sko4.MainActivity;
 import com.sko4.R;
 import com.sko4.api.ApiService;
@@ -82,6 +82,6 @@ public class ItemsListView extends RxCoordinator<EventsWrapper, MainActivity> im
 
     @Override
     public void onChoose(View view, Event event) {
-        EventDetailsActivity.navigate(getActivity(), view, event);
+        EventActivity.navigate(getActivity(), view, event);
     }
 }

@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.sko4.EventDetailsActivity;
+import com.sko4.EventActivity;
 import com.sko4.R;
 import com.sko4.api.ApiService;
 import com.sko4.model.Event;
@@ -25,7 +25,7 @@ import rx.Observable;
  * Event view.
  * Created by Mayboroda on 6/4/16.
  */
-public class EventView extends RxCoordinator<EventData, EventDetailsActivity> {
+public class EventView extends RxCoordinator<EventData, EventActivity> {
 
     @Inject Picasso picasso;
     @Inject ApiService apiService;

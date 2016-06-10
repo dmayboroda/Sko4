@@ -28,9 +28,9 @@ import butterknife.ButterKnife;
  * Activity that provides details information for event that was pressed on MainActivity's ItemsListView
  * Created by Mayboroda on 5/27/16.
  */
-public class EventDetailsActivity extends BaseActivity {
+public class EventActivity extends BaseActivity {
 
-    public static final String TAG = EventDetailsActivity.class.getSimpleName();
+    public static final String TAG = EventActivity.class.getSimpleName();
 
     private static final String IMAGE_EXTRA = "img_extra";
     private static final String TITLE_EXTRA = "tlt_extra";
@@ -39,7 +39,7 @@ public class EventDetailsActivity extends BaseActivity {
     public static void navigate(AppCompatActivity activity,
                                 View transitionImage,
                                 Event event) {
-        Intent intent = new Intent(activity, EventDetailsActivity.class);
+        Intent intent = new Intent(activity, EventActivity.class);
         intent.putExtra(IMAGE_EXTRA, event.getUrl());
         intent.putExtra(TITLE_EXTRA, event.getName());
         intent.putExtra(ID_EXTRA, event.getId());
@@ -62,9 +62,9 @@ public class EventDetailsActivity extends BaseActivity {
             getWindow().setEnterTransition(slide);
             getWindow().setReturnTransition(slide);
         }
+        setContentView(R.layout.event_layout);
         final String title = getIntent().getStringExtra(TITLE_EXTRA);
         final String url   = getIntent().getStringExtra(IMAGE_EXTRA);
-        setContentView(R.layout.event_layout);
         ButterKnife.bind(this);
         ViewCompat.setTransitionName(appBarLayout, IMAGE_EXTRA);
         supportPostponeEnterTransition();

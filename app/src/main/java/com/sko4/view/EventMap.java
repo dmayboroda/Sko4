@@ -10,7 +10,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.sko4.EventDetailsActivity;
+import com.sko4.EventActivity;
 import com.sko4.R;
 import com.sko4.model.Event;
 import com.sko4.model.MapInfo;
@@ -35,7 +35,7 @@ public class EventMap extends CardView implements OnMapReadyCallback {
     protected void onFinishInflate() {
         super.onFinishInflate();
         SupportMapFragment mapFragment = (SupportMapFragment)
-                ((EventDetailsActivity)getContext())
+                ((EventActivity)getContext())
                 .getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
     }
