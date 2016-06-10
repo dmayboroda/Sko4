@@ -1,23 +1,18 @@
 package com.sko4.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.design.widget.CoordinatorLayout;
-import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sko4.BaseActivity;
-import com.sko4.BuildConfig;
 import com.sko4.R;
 import com.sko4.RxUtil;
 import com.sko4.di.component.AppComponent;
 import com.sko4.di.component.DaggerEventsComponent;
 import com.sko4.di.component.EventsComponent;
 import com.sko4.di.module.EventsModule;
-import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,16 +47,8 @@ public abstract class RxCoordinator<T> extends CoordinatorLayout{
                     .getAppComponent();
             component = DaggerEventsComponent.builder()
                     .appComponent(appComponent)
-                    .eventsModule(new EventsModule(new Picasso.Listener() {
-                        @Override
-                        public void onImageLoadFailed(Picasso picasso,
-                                                      Uri uri,
-                                                      Exception exception) {
-                            if (BuildConfig.DEBUG && !TextUtils.isEmpty(uri.toString())) {
-                                Log.e(TAG, uri.toString());
-                            }
-                        }
-                    })).build();
+                    .eventsModule(new EventsModule())
+                    .build();
         }
     }
 
