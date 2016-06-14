@@ -8,6 +8,9 @@
 
     <string name="free">Свободный</string>
 
+    <string name="show_all">Показать всех</string>
+    <string name="today">Сегодня</string>
+
     <!-- DEBUG KEY-->
     <string name="map_key">AIzaSyCSrLG7vt2KC1OjNRt-yLeQ8tPKzZndPug</string>
 </resources>

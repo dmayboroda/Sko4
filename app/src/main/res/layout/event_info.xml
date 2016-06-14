@@ -35,6 +35,7 @@
             android:drawableLeft="@drawable/ic_title_black_18dp"
             android:clickable="true"
             android:text="@string/facebook"
+            android:background="@drawable/ripple_selector"
             />
 
 
@@ -53,6 +54,7 @@
             android:drawablePadding="5dp"
             android:drawableLeft="@drawable/ic_link_black_18dp"
             android:clickable="true"
+            android:background="@drawable/ripple_selector"
             />
 
         <TextView
@@ -98,6 +100,7 @@
             android:padding="10dp"
             android:drawablePadding="5dp"
             android:drawableLeft="@drawable/ic_room_black_18dp"
+            android:background="@drawable/ripple_selector"
             />
 
     </LinearLayout>

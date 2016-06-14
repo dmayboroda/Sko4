@@ -5,8 +5,10 @@ import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.sko4.R;
+import com.sko4.Utils;
 import com.sko4.model.Artist;
 
 import java.util.List;
@@ -20,7 +22,8 @@ import butterknife.ButterKnife;
  */
 public class ArtistStack extends CardView {
 
-    @Bind(R.id.artist_container) LinearLayout container;
+    @Bind(R.id.artist_container)    LinearLayout container;
+    @Bind(R.id.artists_all)         TextView showAll;
 
     private LayoutInflater inflater;
 
@@ -33,6 +36,7 @@ public class ArtistStack extends CardView {
         super.onFinishInflate();
         ButterKnife.bind(this);
         inflater = LayoutInflater.from(getContext());
+        showAll.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
     public void bind(List<Artist> artists) {
@@ -41,7 +45,13 @@ public class ArtistStack extends CardView {
             return;
         }
 
-        int size = artists.size() > 3 ? 3 : artists.size();
+        int size = 3;
+        if (artists.size() > size) {
+            showAll.setVisibility(VISIBLE);
+        } else {
+            size = artists.size();
+            showAll.setVisibility(GONE);
+        }
         for (int i = 0; i < size; i++) {
             ArtistItem artistItem = (ArtistItem)inflater
                     .inflate(R.layout.artist_info, null);

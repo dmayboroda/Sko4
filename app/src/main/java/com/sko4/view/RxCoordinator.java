@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.sko4.BaseActivity;
 import com.sko4.R;
 import com.sko4.RxUtil;
+import com.sko4.Utils;
 import com.sko4.di.component.AppComponent;
 import com.sko4.di.component.DaggerEventsComponent;
 import com.sko4.di.component.EventsComponent;
@@ -55,6 +56,7 @@ public abstract class RxCoordinator<T, A extends BaseActivity> extends Coordinat
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
+        error.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
         error.setText(getContext().getText(R.string.error_nothing));
         progressBar.setIndeterminateDrawable(new IndeterminateProgressDrawable(getContext()));
         switcher.setDisplayedChildId(R.id.progress);

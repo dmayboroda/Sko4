@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.transition.Slide;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -90,8 +91,7 @@ public class EventActivity extends BaseActivity {
         toolbarLayout.setContentScrimColor(primary);
         toolbarLayout.setStatusBarScrimColor(primary);
         Glide.with(this).load(url)
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e,
@@ -119,6 +119,16 @@ public class EventActivity extends BaseActivity {
 
     public String getId() {
         return getIntent().getStringExtra(ID_EXTRA);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

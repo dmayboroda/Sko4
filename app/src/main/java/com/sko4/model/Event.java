@@ -145,6 +145,11 @@ public class Event {
                 && finishDate == null;
     }
 
+    public boolean isToday() {
+        DateTime date = getStartDate();
+        return date != null && date.isEqualNow();
+    }
+
     @Nullable
     public String getVenue() {
         if (venues == null || venues.isEmpty()) { return null; }

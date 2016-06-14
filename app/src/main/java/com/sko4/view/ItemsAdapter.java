@@ -60,8 +60,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     public long getItemId(int position) { return position; }
 
     public void publish(EventsWrapper wrapper) {
-        List<Event> items = wrapper.getEvents();
-        this.items = items;
+        this.items = wrapper.getEvents();
         notifyDataSetChanged();
     }
 
@@ -73,6 +72,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         @Bind(R.id.item_cost)    TextView cost;
         @Bind(R.id.item_month)   TextView month;
         @Bind(R.id.item_day)     TextView day;
+        @Bind(R.id.item_today)   TextView today;
 
         private View itemView;
 
@@ -111,8 +111,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             }
             Glide.with(itemView.getContext())
                     .load(bindable.getUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .into(preview);
             DateTime time = bindable.getStartDate();
             if (time != null) {
@@ -126,6 +125,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
                 month.setVisibility(View.GONE);
                 day.setVisibility(View.GONE);
             }
+
+            today.setVisibility(bindable.isToday() ? View.VISIBLE : View.GONE);
         }
 
     }

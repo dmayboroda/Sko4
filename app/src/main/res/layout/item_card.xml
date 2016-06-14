@@ -60,6 +60,22 @@
             android:background="@color/accent"
             />
 
+        <TextView
+            android:id="@+id/item_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/primary"
+            android:background="@color/item_pressed"
+            android:text="@string/today"
+            />
+
 
         <TextView
             android:id="@+id/item_name"
