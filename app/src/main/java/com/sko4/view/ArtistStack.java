@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 
 import com.sko4.R;
 import com.sko4.model.Artist;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class ArtistStack extends CardView {
         inflater = LayoutInflater.from(getContext());
     }
 
-    public void bind(List<Artist> artists, Picasso picasso) {
+    public void bind(List<Artist> artists) {
         if (artists.isEmpty()) {
             setVisibility(GONE);
             return;
@@ -46,7 +45,7 @@ public class ArtistStack extends CardView {
         for (int i = 0; i < size; i++) {
             ArtistItem artistItem = (ArtistItem)inflater
                     .inflate(R.layout.artist_info, null);
-            artistItem.bind(artists.get(i), picasso);
+            artistItem.bind(artists.get(i));
             container.addView(artistItem);
         }
 

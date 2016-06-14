@@ -7,11 +7,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sko4.R;
 import com.sko4.Utils;
 import com.sko4.model.Artist;
 import com.sko4.model.Style;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class ArtistItem extends RelativeLayout {
         styles.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
-    public void bind(Artist artist, Picasso picasso) {
+    public void bind(Artist artist) {
 
         List<Style> styleList   = artist.getStyles();
         String artistName       = artist.getName();
@@ -61,8 +62,11 @@ public class ArtistItem extends RelativeLayout {
             if (TextUtils.isEmpty(squareUrl)) {
                 avatar.setVisibility(GONE);
             } else {
-                picasso.load(squareUrl)
-                        .transform(new CircleTransform())
+                Glide.with(getContext())
+                        .load(squareUrl)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .transform(new CircleTransform(getContext()))
+                        .centerCrop()
                         .into(avatar);
                 avatar.setVisibility(VISIBLE);
             }

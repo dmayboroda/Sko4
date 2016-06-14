@@ -11,15 +11,19 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.sko4.model.Event;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,7 +38,7 @@ public class EventActivity extends BaseActivity {
 
     private static final String IMAGE_EXTRA = "img_extra";
     private static final String TITLE_EXTRA = "tlt_extra";
-    private static final String ID_EXTRA    = "id_extra";
+    private static final String ID_EXTRA = "id_extra";
 
     public static void navigate(AppCompatActivity activity,
                                 View transitionImage,
@@ -64,16 +68,16 @@ public class EventActivity extends BaseActivity {
         }
         setContentView(R.layout.event_layout);
         final String title = getIntent().getStringExtra(TITLE_EXTRA);
-        final String url   = getIntent().getStringExtra(IMAGE_EXTRA);
+        final String url = getIntent().getStringExtra(IMAGE_EXTRA);
         ButterKnife.bind(this);
         ViewCompat.setTransitionName(appBarLayout, IMAGE_EXTRA);
         supportPostponeEnterTransition();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        int primary = 0;
-        int primaryDark = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        int primary;
+        int primaryDark;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             primary = getResources().getColor(R.color.primary, null);
             primaryDark = getResources().getColor(R.color.primaryDark, null);
         } else {
@@ -85,19 +89,32 @@ public class EventActivity extends BaseActivity {
         toolbarLayout.setCollapsedTitleTextColor(primaryDark);
         toolbarLayout.setContentScrimColor(primary);
         toolbarLayout.setStatusBarScrimColor(primary);
-        Picasso.with(this).load(url).into(image, new Callback() {
-            @Override
-            public void onSuccess() {
-                supportStartPostponedEnterTransition();
-            }
+        Glide.with(this).load(url)
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e,
+                                               String model,
+                                               Target<GlideDrawable> target,
+                                               boolean isFirstResource) {
+                        if (BuildConfig.DEBUG && !TextUtils.isEmpty(e.getMessage())) {
+                            Log.e(TAG, e.getMessage());
+                        }
+                        return false;
+                    }
 
-            @Override
-            public void onError() {
-                if (BuildConfig.DEBUG) {
-                    Log.e(TAG, "unable to load image");
-                }
-            }
-        });
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource,
+                                                   String model,
+                                                   Target<GlideDrawable> target,
+                                                   boolean isFromMemoryCache,
+                                                   boolean isFirstResource) {
+                        supportStartPostponedEnterTransition();
+                        return false;
+                    }
+                })
+                .into(image);
     }
 
     public String getId() {
@@ -112,5 +129,4 @@ public class EventActivity extends BaseActivity {
             return false;
         }
     }
-
 }

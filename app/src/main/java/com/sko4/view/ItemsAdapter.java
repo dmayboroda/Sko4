@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sko4.R;
 import com.sko4.Utils;
 import com.sko4.model.Event;
 import com.sko4.model.EventsWrapper;
-import com.squareup.picasso.Picasso;
 
 import org.joda.time.DateTime;
 
@@ -34,11 +35,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     }
 
     private List<Event> items = Collections.emptyList();
-    private final Picasso picasso;
     private final Chooser chooser;
 
-    public ItemsAdapter(Picasso picasso, Chooser chooser) {
-        this.picasso = picasso;
+    public ItemsAdapter(Chooser chooser) {
         this.chooser = chooser;
     }
 
@@ -110,7 +109,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
                 cost.setText(bindable.getPrice().replace("Free", free));
                 cost.setVisibility(View.VISIBLE);
             }
-            picasso.load(bindable.getUrl())
+            Glide.with(itemView.getContext())
+                    .load(bindable.getUrl())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
                     .into(preview);
             DateTime time = bindable.getStartDate();
             if (time != null) {

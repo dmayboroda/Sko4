@@ -12,7 +12,6 @@ import com.sko4.R;
 import com.sko4.api.ApiService;
 import com.sko4.model.Event;
 import com.sko4.model.EventsWrapper;
-import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -29,7 +28,6 @@ public class ItemsListView extends RxCoordinator<EventsWrapper, MainActivity> im
     public static final String CITY_ID  = "49713";
 
     @Inject ApiService api;
-    @Inject Picasso picasso;
 
     @Bind(R.id.items_recycler)  RecyclerView itemsList;
 
@@ -45,7 +43,7 @@ public class ItemsListView extends RxCoordinator<EventsWrapper, MainActivity> im
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        adapter = new ItemsAdapter(picasso, this);
+        adapter = new ItemsAdapter(this);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {

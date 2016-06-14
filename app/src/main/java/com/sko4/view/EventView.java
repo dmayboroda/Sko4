@@ -13,7 +13,6 @@ import com.sko4.R;
 import com.sko4.api.ApiService;
 import com.sko4.model.Event;
 import com.sko4.model.EventData;
-import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -27,7 +26,6 @@ import rx.Observable;
  */
 public class EventView extends RxCoordinator<EventData, EventActivity> {
 
-    @Inject Picasso picasso;
     @Inject ApiService apiService;
 
     @Bind(R.id.event_info)          EventInfo eventInfo;
@@ -72,7 +70,7 @@ public class EventView extends RxCoordinator<EventData, EventActivity> {
         eventInfo.bind(event);
         eventMap.bind(event);
         eventDesc.bind(event);
-        artistStack.bind(event.getArtists(), picasso);
+        artistStack.bind(event.getArtists());
 
         String tickets = event.getTickets();
         if (TextUtils.isEmpty(tickets)) {
