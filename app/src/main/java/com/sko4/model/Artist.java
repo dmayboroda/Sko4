@@ -30,6 +30,8 @@ public class Artist {
     private Image image;
     @SerializedName("styles")
     private List<Style> styles;
+    @SerializedName("media")
+    private List<Media> media;
 
     public String getIdStage() {
         return idStage;
@@ -69,5 +71,7 @@ public class Artist {
         return !TextUtils.isEmpty(square) ?
                 "http://files.sko4.com" + square : null;
     }
+
+    public List<Media> getMedia() { return media; }
 
 }
