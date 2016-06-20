@@ -28,7 +28,7 @@
             />
 
         <activity
-            android:name=".ArtistActivity"
+            android:name=".DetailsActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
             />

@@ -3,7 +3,7 @@ package com.sko4.view;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.sko4.ArtistActivity;
+import com.sko4.DetailsActivity;
 import com.sko4.api.ApiService;
 import com.sko4.model.ArtistData;
 
@@ -15,7 +15,7 @@ import rx.Observable;
  * Artist view.
  * Created by Mayboroda on 6/15/16.
  */
-public class ArtistView extends RxCoordinator<ArtistData, ArtistActivity>{
+public class ArtistView extends RxCoordinator<ArtistData, DetailsActivity>{
 
     @Inject ApiService apiService;
 
