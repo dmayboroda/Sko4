@@ -1,6 +1,6 @@
 package com.sko4.api;
 
-import com.sko4.model.ArtistData;
+import com.sko4.model.DataObject;
 import com.sko4.model.EventData;
 import com.sko4.model.EventsWrapper;
 
@@ -22,5 +22,8 @@ public interface ApiService {
     Observable<EventData> getEventData(@Path("id") String id);
 
     @GET("/api/artist/{id}")
-    Observable<ArtistData> getArtistData(@Path("id") String id);
+    Observable<DataObject> getArtistData(@Path("id") String id);
+
+    @GET("/api/venue/{id}")
+    Observable<DataObject> getVenueData(@Path("id") String id);
 }

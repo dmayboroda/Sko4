@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sko4.R;
 import com.sko4.Utils;
-import com.sko4.model.Artist;
+import com.sko4.model.Details;
 import com.sko4.model.Style;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class ArtistItem extends RelativeLayout {
         styles.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
-    public void bind(Artist artist) {
+    public void bind(Details artist) {
 
         List<Style> styleList   = artist.getStyles();
         String artistName       = artist.getName();

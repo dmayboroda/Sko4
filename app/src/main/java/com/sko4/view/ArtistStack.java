@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.sko4.R;
 import com.sko4.Utils;
-import com.sko4.model.Artist;
+import com.sko4.model.Details;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class ArtistStack extends CardView {
         showAll.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
-    public void bind(List<Artist> artists) {
+    public void bind(List<Details> artists) {
         if (artists.isEmpty()) {
             setVisibility(GONE);
             return;

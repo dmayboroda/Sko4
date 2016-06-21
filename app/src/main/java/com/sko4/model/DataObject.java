@@ -8,14 +8,18 @@ import java.util.List;
  * Model for specific artist request.
  * Created by Mayboroda on 6/15/16.
  */
-public class ArtistData {
+public class DataObject {
 
     @SerializedName("data")
-    private Artist artist;
+    private Details data;
     @SerializedName("photos")
     private List<Photo> photos;
+    @SerializedName("events")
+    private List<Event> events;
 
-    public Artist getArtist() { return artist; }
+    public Details getArtist() { return data; }
 
     public List<Photo> getPhotos() { return photos; }
+
+    public List<Event> getEvents() { return events; }
 }

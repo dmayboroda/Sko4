@@ -9,13 +9,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Artist model.
- * Created by Mayboroda.
+ * Details object for artist and event.
+ * Created by Mayboroda on 6/21/16.
  */
-public class Artist {
+public class Details {
 
-    @SerializedName("id_stage")
-    private String idStage;
     @SerializedName("id")
     private String id;
     @SerializedName("name")
@@ -24,18 +22,18 @@ public class Artist {
     private String path;
     @SerializedName("file_name")
     private String fileName;
-    @SerializedName("id_sc_track")
-    private String soundcloud;
     @SerializedName("img")
     private Image image;
     @SerializedName("styles")
     private List<Style> styles;
     @SerializedName("media")
     private List<Media> media;
-
-    public String getIdStage() {
-        return idStage;
-    }
+    @SerializedName("addr")
+    private String address;
+    @SerializedName("maps")
+    private List<MapInfo> mapInfo;
+    @SerializedName("url")
+    private String url;
 
     public String getId() {
         return id;
@@ -43,16 +41,6 @@ public class Artist {
 
     public String getName() {
         return name;
-    }
-
-    public String getPath() { return path; }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getSoundcloud() {
-        return soundcloud;
     }
 
     public Image getImage() { return image; }
@@ -72,6 +60,21 @@ public class Artist {
                 "http://files.sko4.com" + square : null;
     }
 
+    public String getImageByPath() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("http://files.sko4.com");
+        builder.append(path);
+        builder.append(id);
+        builder.append("square");
+        builder.append(fileName);
+        return builder.toString();
+    }
+
     public List<Media> getMedia() { return media; }
 
+    public String getAddress() { return address; }
+
+    public List<MapInfo> getMapInfo() { return mapInfo; }
+
+    public String getUrl() { return url; }
 }

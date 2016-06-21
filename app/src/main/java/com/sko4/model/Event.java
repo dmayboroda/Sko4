@@ -46,7 +46,7 @@ public class Event {
     @SerializedName("body")
     private String body;
     @SerializedName("artists")
-    private List<Artist> artists;
+    private List<Details> artists;
 
     @Nullable
     public DateTime getStartDate() {
@@ -197,5 +197,5 @@ public class Event {
 
     public String getBody() { return body; }
 
-    public List<Artist> getArtists() { return artists; }
+    public List<Details> getArtists() { return artists; }
 }
