@@ -90,6 +90,10 @@ public class Event {
 
     public String getId() { return id; }
 
+    public String getVenueId() {
+        return venues.get(0).getId();
+    }
+
     public String getVendor() {
         StringBuilder builder = new StringBuilder();
         if (venues != null && !venues.isEmpty()) {

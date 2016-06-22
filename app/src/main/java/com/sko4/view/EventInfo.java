@@ -3,12 +3,14 @@ package com.sko4.view;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.sko4.DetailsActivity;
 import com.sko4.R;
 import com.sko4.Utils;
 import com.sko4.model.Event;
@@ -46,8 +48,7 @@ public class EventInfo extends CardView {
         venue.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
-    public void bind(Event eventData) {
-
+    public void bind(final Event eventData) {
         if (eventData.isInfoDisable()) {
             setVisibility(GONE);
             return;
@@ -55,10 +56,10 @@ public class EventInfo extends CardView {
             setVisibility(VISIBLE);
         }
 
-        String facebook = eventData.getFacebook();
-        String url      = eventData.getWeb();
-        String prices   = eventData.getPrice();
-        String venues   = eventData.getVenue();
+        final String facebook = eventData.getFacebook();
+        final String url      = eventData.getWeb();
+        final String prices   = eventData.getPrice();
+        final String venues   = eventData.getVenue();
 
         DateTime startDate  = eventData.getStartDate();
         DateTime finishDate = eventData.getFinishDate();
@@ -69,6 +70,17 @@ public class EventInfo extends CardView {
         if (!TextUtils.isEmpty(venues)) {
             venue.setVisibility(VISIBLE);
             venue.setText(venues);
+            venue.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int[] screenxy = new int[2];
+                    view.getLocationOnScreen(screenxy);
+                    screenxy[0] += view.getWidth() / 2;
+                    String venueId  = eventData.getVenueId();
+                    DetailsActivity.startVenuesActivity(getContext(),screenxy, venueId, venues);
+                    ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
+                }
+            });
         } else {
             venue.setVisibility(GONE);
         }

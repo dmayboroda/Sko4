@@ -1,14 +1,17 @@
 package com.sko4.view;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.sko4.DetailsActivity;
 import com.sko4.R;
 import com.sko4.Utils;
 import com.sko4.model.Details;
@@ -43,9 +46,9 @@ public class ArtistItem extends RelativeLayout {
 
     public void bind(Details artist) {
 
-        List<Style> styleList   = artist.getStyles();
-        String artistName       = artist.getName();
-        String squareUrl        = artist.getSquareUrl();
+        final List<Style> styleList   = artist.getStyles();
+        final String artistName       = artist.getName();
+        final String squareUrl        = artist.getSquareUrl();
 
         if (styleList.isEmpty()
             && TextUtils.isEmpty(artistName)
@@ -82,6 +85,20 @@ public class ArtistItem extends RelativeLayout {
                 }
                 styles.setText(builder.toString());
                 styles.setVisibility(VISIBLE);
+            }
+
+            final String id = artist.getId();
+            if (!TextUtils.isEmpty(id)) {
+                setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int[] screenxy = new int[2];
+                        view.getLocationOnScreen(screenxy);
+                        screenxy[0] += view.getWidth() / 2;
+                        DetailsActivity.startArtistsActivity(getContext(),screenxy, id, artistName);
+                        ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
+                    }
+                });
             }
         }
 
