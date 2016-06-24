@@ -79,7 +79,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
 
-            <!-- main data view -->
+            <include layout="@layout/maps_info"/>
 
         </android.support.v4.widget.NestedScrollView>
     </com.sko4.view.StateViewSwitcher>
