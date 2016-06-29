@@ -2,13 +2,11 @@ package com.sko4;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
 
 import com.sko4.view.DataView;
 
@@ -26,11 +24,13 @@ public class DetailsActivity extends BaseActivity {
     private static final String IS_ARTIST   = "is_artist";
     private static final String TITLE       = "details_title";
 
-    public static void startArtistsActivity(Context context, int[] coords, String id, String name) {
+    public static void startArtistsActivity(Context context, int[] coords,
+                                            String id, String name) {
         startDetailsActivity(context, coords, id, true, name);
     }
 
-    public static void startVenuesActivity(Context context, int[] coords, String id, String name){
+    public static void startVenuesActivity(Context context, int[] coords,
+                                           String id, String name){
         startDetailsActivity(context, coords, id, false, name);
     }
 
@@ -55,34 +55,6 @@ public class DetailsActivity extends BaseActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        String name = getIntent().getStringExtra(TITLE);
-        toolbar.setTitle(name);
-        int primary;
-        int primaryDark;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            primary = getResources().getColor(R.color.primary, null);
-            primaryDark = getResources().getColor(R.color.primaryDark, null);
-        } else {
-            primary = getResources().getColor(R.color.primary);
-            primaryDark = getResources().getColor(R.color.primaryDark);
-        }
-        toolbarLayout.setTitle(name);
-        toolbarLayout.setExpandedTitleColor(primary);
-        toolbarLayout.setCollapsedTitleTextColor(primaryDark);
-        toolbarLayout.setContentScrimColor(primary);
-        toolbarLayout.setStatusBarScrimColor(primary);
-        if (savedInstanceState == null) {
-            dataView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
-                    dataView.getViewTreeObserver().removeOnPreDrawListener(this);
-                    dataView.startAnimation();
-                    return true;
-                }
-            });
-        } else {
-            dataView.finishAnimation();
-        }
     }
 
     @Override

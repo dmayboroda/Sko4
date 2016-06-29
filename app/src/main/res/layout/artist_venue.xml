@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     >
-
+    
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
@@ -33,8 +33,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:elevation="8dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:fitsSystemWindows="true"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
                 />
@@ -79,7 +79,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
 
-            <include layout="@layout/maps_info"/>
+            <!-- <include layout="@layout/maps_info"/> -->
 
         </android.support.v4.widget.NestedScrollView>
     </com.sko4.view.StateViewSwitcher>
