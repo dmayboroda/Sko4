@@ -14,8 +14,8 @@ import rx.Observable;
  * Artist and venue details view.
  * Created by Mayboroda on 6/15/16.
  */
-public class DataView extends RxCoordinator<DataObject, DetailsActivity>{
-
+public class DataView extends RxCoordinator<DataObject, DetailsActivity>
+        implements RevealView.OnRevealChange{
 
     @Inject ApiService apiService;
 
@@ -43,5 +43,14 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>{
     @Override
     public void call(DataObject dataObject) {
 
+    }
+
+    @Override
+    public void onRevealChange(int state) {
+        if (state == RevealView.FINISHED) {
+            switcher.setVisibility(VISIBLE);
+        } else {
+            switcher.setVisibility(INVISIBLE);
+        }
     }
 }

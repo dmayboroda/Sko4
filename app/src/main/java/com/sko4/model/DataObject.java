@@ -17,7 +17,13 @@ public class DataObject {
     @SerializedName("events")
     private List<Event> events;
 
-    public Details getArtist() { return data; }
+    public DataObject(Details data) {
+        this.data = data;
+    }
+
+    public DataObject() { /* nothing */ }
+
+    public Details getData() { return data; }
 
     public List<Photo> getPhotos() { return photos; }
 

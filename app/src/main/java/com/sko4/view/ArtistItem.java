@@ -46,9 +46,9 @@ public class ArtistItem extends RelativeLayout {
 
     public void bind(Details artist) {
 
-        final List<Style> styleList   = artist.getStyles();
-        final String artistName       = artist.getName();
-        final String squareUrl        = artist.getSquareUrl();
+        List<Style> styleList   = artist.getStyles();
+        String artistName       = artist.getName();
+        String squareUrl        = artist.getSquareUrl();
 
         if (styleList.isEmpty()
             && TextUtils.isEmpty(artistName)
@@ -88,6 +88,8 @@ public class ArtistItem extends RelativeLayout {
             }
 
             final String id = artist.getId();
+            final String name = artist.getName();
+            final Details details = new Details(name, id);
             if (!TextUtils.isEmpty(id)) {
                 setOnClickListener(new OnClickListener() {
                     @Override
@@ -95,7 +97,7 @@ public class ArtistItem extends RelativeLayout {
                         int[] screenxy = new int[2];
                         view.getLocationOnScreen(screenxy);
                         screenxy[0] += view.getWidth() / 2;
-                        DetailsActivity.startArtistsActivity(getContext(),screenxy, id, artistName);
+                        DetailsActivity.startArtistsActivity(getContext(),screenxy,details);
                         ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
                     }
                 });

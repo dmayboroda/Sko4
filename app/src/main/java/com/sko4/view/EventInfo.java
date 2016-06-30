@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.sko4.DetailsActivity;
 import com.sko4.R;
 import com.sko4.Utils;
+import com.sko4.model.Details;
 import com.sko4.model.Event;
 
 import org.joda.time.DateTime;
@@ -56,10 +57,10 @@ public class EventInfo extends CardView {
             setVisibility(VISIBLE);
         }
 
-        final String facebook = eventData.getFacebook();
-        final String url      = eventData.getWeb();
-        final String prices   = eventData.getPrice();
-        final String venues   = eventData.getVenue();
+        String facebook = eventData.getFacebook();
+        String url      = eventData.getWeb();
+        String prices   = eventData.getPrice();
+        String venues   = eventData.getVenue();
 
         DateTime startDate  = eventData.getStartDate();
         DateTime finishDate = eventData.getFinishDate();
@@ -67,6 +68,9 @@ public class EventInfo extends CardView {
         String start  = startDate.toString("dd.MM.yyyy");
         String finish = finishDate.toString("dd.MM.yyyy");
 
+        final String id       = eventData.getVenueId();
+        final String name     = eventData.getName();
+        final Details details = new Details(name, id);
         if (!TextUtils.isEmpty(venues)) {
             venue.setVisibility(VISIBLE);
             venue.setText(venues);
@@ -76,8 +80,7 @@ public class EventInfo extends CardView {
                     int[] screenxy = new int[2];
                     view.getLocationOnScreen(screenxy);
                     screenxy[0] += view.getWidth() / 2;
-                    String venueId  = eventData.getVenueId();
-                    DetailsActivity.startVenuesActivity(getContext(),screenxy, venueId, venues);
+                    DetailsActivity.startVenuesActivity(getContext(), screenxy, details);
                     ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
                 }
             });

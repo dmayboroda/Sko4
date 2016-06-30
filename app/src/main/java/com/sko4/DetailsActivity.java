@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.ViewTreeObserver;
 
+import com.sko4.model.Details;
 import com.sko4.view.DataView;
+import com.sko4.view.RevealView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,18 +26,18 @@ public class DetailsActivity extends BaseActivity {
     private static final String IS_ARTIST   = "is_artist";
     private static final String TITLE       = "details_title";
 
-    public static void startArtistsActivity(Context context, int[] coords,
-                                            String id, String name) {
-        startDetailsActivity(context, coords, id, true, name);
+    public static void startArtistsActivity(Context context, int[] coords, Details data) {
+        startDetailsActivity(context, coords, true, data);
     }
 
-    public static void startVenuesActivity(Context context, int[] coords,
-                                           String id, String name){
-        startDetailsActivity(context, coords, id, false, name);
+    public static void startVenuesActivity(Context context, int[] coords, Details data){
+        startDetailsActivity(context, coords, false, data);
     }
 
-    private static void startDetailsActivity(Context context, int[] coords, String id,
-                                             boolean isArtist, String name){
+    private static void startDetailsActivity(Context context, int[] coords,
+                                             boolean isArtist, Details object){
+        String id   = object.getId();
+        String name = object.getName();
         Intent intent = new Intent(context, DetailsActivity.class);
         intent.putExtra(DATA_ID, id);
         intent.putExtra(IS_ARTIST, isArtist);
@@ -46,15 +48,28 @@ public class DetailsActivity extends BaseActivity {
 
     @Bind(R.id.data_layout)         DataView dataView;
     @Bind(R.id.toolbar)             Toolbar toolbar;
-    @Bind(R.id.collapsing_toolbar)  CollapsingToolbarLayout toolbarLayout;
+    @Bind(R.id.reveal_view)         RevealView revealView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.artist_venue);
+        setContentView(R.layout.reveal_details);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        revealView.setOnRevealChange(dataView);
+        if (savedInstanceState == null) {
+            revealView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                    revealView.getViewTreeObserver().removeOnPreDrawListener(this);
+                    revealView.start(getCoords());
+                    return true;
+                }
+            });
+        } else {
+            revealView.finish();
+        }
     }
 
     @Override
@@ -78,5 +93,7 @@ public class DetailsActivity extends BaseActivity {
     public int[] getCoords() {
         return getIntent().getIntArrayExtra(SCREEN_XY);
     }
+
+    public String getName() { return getIntent().getStringExtra(TITLE); }
 
 }
