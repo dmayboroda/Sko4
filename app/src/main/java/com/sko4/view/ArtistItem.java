@@ -44,7 +44,7 @@ public class ArtistItem extends RelativeLayout {
         styles.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
-    public void bind(Details artist) {
+    public void bind(final Details artist) {
 
         List<Style> styleList   = artist.getStyles();
         String artistName       = artist.getName();
@@ -88,8 +88,6 @@ public class ArtistItem extends RelativeLayout {
             }
 
             final String id = artist.getId();
-            final String name = artist.getName();
-            final Details details = new Details(name, id);
             if (!TextUtils.isEmpty(id)) {
                 setOnClickListener(new OnClickListener() {
                     @Override
@@ -97,7 +95,7 @@ public class ArtistItem extends RelativeLayout {
                         int[] screenxy = new int[2];
                         view.getLocationOnScreen(screenxy);
                         screenxy[0] += view.getWidth() / 2;
-                        DetailsActivity.startArtistsActivity(getContext(),screenxy,details);
+                        DetailsActivity.startArtistsActivity(getContext(),screenxy, artist);
                         ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
                     }
                 });

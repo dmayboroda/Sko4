@@ -97,7 +97,7 @@
 
                 <include layout="@layout/maps_info"/>
 
-                <include layout="@layout/event_desc"/>
+                <include layout="@layout/desc_view"/>
 
                 <include layout="@layout/artist_stack"/>
 

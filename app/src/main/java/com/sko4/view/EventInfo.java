@@ -15,8 +15,11 @@ import com.sko4.R;
 import com.sko4.Utils;
 import com.sko4.model.Details;
 import com.sko4.model.Event;
+import com.sko4.model.Venue;
 
 import org.joda.time.DateTime;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,7 +61,6 @@ public class EventInfo extends CardView {
         }
 
         String facebook = eventData.getFacebook();
-        String url      = eventData.getWeb();
         String prices   = eventData.getPrice();
         String venues   = eventData.getVenue();
 
@@ -67,10 +69,8 @@ public class EventInfo extends CardView {
 
         String start  = startDate.toString("dd.MM.yyyy");
         String finish = finishDate.toString("dd.MM.yyyy");
-
-        final String id       = eventData.getVenueId();
-        final String name     = eventData.getName();
-        final Details details = new Details(name, id);
+        final String url        = eventData.getWeb();
+        final List<Venue> hosts = eventData.getHosts();
         if (!TextUtils.isEmpty(venues)) {
             venue.setVisibility(VISIBLE);
             venue.setText(venues);
@@ -80,8 +80,11 @@ public class EventInfo extends CardView {
                     int[] screenxy = new int[2];
                     view.getLocationOnScreen(screenxy);
                     screenxy[0] += view.getWidth() / 2;
-                    DetailsActivity.startVenuesActivity(getContext(), screenxy, details);
-                    ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
+                    if (hosts != null && !hosts.isEmpty()) {
+                        Details details = new Details(hosts.get(0));
+                        DetailsActivity.startVenuesActivity(getContext(), screenxy, details);
+                        ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
+                    }
                 }
             });
         } else {

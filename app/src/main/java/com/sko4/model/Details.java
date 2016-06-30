@@ -34,13 +34,33 @@ public class Details {
     private List<MapInfo> mapInfo;
     @SerializedName("url")
     private String url;
+    @SerializedName("desc_ru")
+    private String body;
+    private String sum;
 
-    public Details(String name, String id) {
-        this.name = name;
-        this.id = id;
+    public Details(Venue venue) {
+        this.name = venue.getName();
+        this.id = venue.getId();
+        this.sum = venue.getAddress();
     }
 
     public Details() { /* nothing */ }
+
+    public String getSum() {
+        if (TextUtils.isEmpty(sum)) {
+            StringBuilder builder = new StringBuilder();
+            if (styles != null && !styles.isEmpty()) {
+                for (Style style : styles) {
+                    if (builder.length() > 0) {
+                        builder.append(", ");
+                    }
+                    builder.append(style.getName());
+                }
+                return builder.toString();
+            }
+        }
+        return sum;
+    }
 
     public String getId() {
         return id;
@@ -76,6 +96,8 @@ public class Details {
         builder.append(fileName);
         return builder.toString();
     }
+
+    public String getBody() { return body; }
 
     public List<Media> getMedia() { return media; }
 

@@ -14,6 +14,8 @@ public class Venue {
     private String name;
     @SerializedName("addr")
     private String address;
+    @SerializedName("city")
+    private String city;
 
     public String getId() {
         return id;

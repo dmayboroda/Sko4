@@ -1,6 +1,7 @@
 package com.sko4.view;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 
@@ -10,9 +11,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.sko4.EventActivity;
 import com.sko4.R;
-import com.sko4.model.Event;
 import com.sko4.model.MapInfo;
 
 import java.util.List;
@@ -21,13 +20,13 @@ import java.util.List;
  * Event map card view.
  * Created by Mayboroda on 6/6/16.
  */
-public class EventMap extends CardView implements OnMapReadyCallback {
+public class MapCard extends CardView implements OnMapReadyCallback {
 
     private static final int ZOOM_LEVEL = 15;
 
     private GoogleMap map;
 
-    public EventMap(Context context, AttributeSet attrs) {
+    public MapCard(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -35,7 +34,7 @@ public class EventMap extends CardView implements OnMapReadyCallback {
     protected void onFinishInflate() {
         super.onFinishInflate();
         SupportMapFragment mapFragment = (SupportMapFragment)
-                ((EventActivity)getContext())
+                ((AppCompatActivity)getContext())
                 .getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
     }
@@ -45,9 +44,7 @@ public class EventMap extends CardView implements OnMapReadyCallback {
         this.map = map;
     }
 
-    public void bind(Event event) {
-        List<MapInfo> mapInfo = event.getMapInfo();
-
+    public void bind(List<MapInfo> mapInfo) {
         if (mapInfo!= null && !mapInfo.isEmpty()) {
             MapInfo info = mapInfo.get(0);
             double lat = Double.valueOf(info.getLatitude());

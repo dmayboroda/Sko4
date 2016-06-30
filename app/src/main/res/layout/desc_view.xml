@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sko4.view.EventDesc
+<com.sko4.view.DescCard
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/event_desc"
+    android:id="@+id/desc_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
@@ -15,7 +15,7 @@
     >
 
     <TextView
-        android:id="@+id/event_body"
+        android:id="@+id/desc_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="17sp"
@@ -26,4 +26,4 @@
         android:background="@drawable/ripple_selector"
         />
 
-</com.sko4.view.EventDesc>
+</com.sko4.view.DescCard>

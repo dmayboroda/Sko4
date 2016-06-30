@@ -154,6 +154,10 @@ public class Event {
         return date != null && date.isEqualNow();
     }
 
+    public List<Venue> getHosts() {
+        return venues;
+    }
+
     @Nullable
     public String getVenue() {
         if (venues == null || venues.isEmpty()) { return null; }
@@ -168,6 +172,8 @@ public class Event {
         }
         return builder.toString();
     }
+
+    public String getCity() { return city; }
 
     public void setId(String id) {
         this.id = id;

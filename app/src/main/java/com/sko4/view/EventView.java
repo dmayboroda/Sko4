@@ -29,8 +29,8 @@ public class EventView extends RxCoordinator<EventData, EventActivity> {
     @Inject ApiService apiService;
 
     @Bind(R.id.event_info)          EventInfo eventInfo;
-    @Bind(R.id.event_map)           EventMap eventMap;
-    @Bind(R.id.event_desc)          EventDesc eventDesc;
+    @Bind(R.id.map_card)            MapCard mapCard;
+    @Bind(R.id.desc_card)           DescCard descCard;
     @Bind(R.id.event_fab)           FloatingActionButton actionButton;
     @Bind(R.id.artist_stack)        ArtistStack artistStack;
 
@@ -64,12 +64,12 @@ public class EventView extends RxCoordinator<EventData, EventActivity> {
     public void call(EventData eventData) {
         Event event = eventData.getData();
         if (event == null) {
-            eventSubject.onError(new Throwable());
+            switcher.setDisplayedChildId(R.id.error_message);
             return;
         }
         eventInfo.bind(event);
-        eventMap.bind(event);
-        eventDesc.bind(event);
+        descCard.bind(event.getBody());
+        mapCard.bind(event.getMapInfo());
         artistStack.bind(event.getArtists());
 
         String tickets = event.getTickets();

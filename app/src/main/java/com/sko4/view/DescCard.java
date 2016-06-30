@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.sko4.R;
 import com.sko4.Utils;
-import com.sko4.model.Event;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,11 +17,11 @@ import butterknife.ButterKnife;
  * Event description card view.
  * Created by Mayboroda on 6/6/16.
  */
-public class EventDesc extends CardView{
+public class DescCard extends CardView{
 
-    @Bind(R.id.event_body) TextView desc;
+    @Bind(R.id.desc_body) TextView desc;
 
-    public EventDesc(Context context, AttributeSet attrs) {
+    public DescCard(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -33,8 +32,7 @@ public class EventDesc extends CardView{
         desc.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
-    public void bind(Event event) {
-        String body = event.getBody();
+    public void bind(String body) {
         if (TextUtils.isEmpty(body)) {
             setVisibility(GONE);
         } else {
