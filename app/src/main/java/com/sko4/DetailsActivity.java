@@ -37,7 +37,6 @@ public class DetailsActivity extends ToolbarActivity {
                                              boolean isArtist, Details object){
         String id   = object.getId();
         String name = object.getName();
-        String web  = object.getUrl();
         String sum  = object.getSum();
         Intent intent = new Intent(context, DetailsActivity.class);
         intent.putExtra(IS_ARTIST, isArtist);
@@ -54,6 +53,9 @@ public class DetailsActivity extends ToolbarActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        toolbarLayout.setExpandedTitleColor(transparent);
+        toolbarLayout.setCollapsedTitleTextColor(primaryDark);
+        toolbarLayout.setContentScrimColor(primary);
         toolbarLayout.setTitle(getName());
         revealView.setOnRevealChange(dataView);
         if (savedInstanceState == null) {

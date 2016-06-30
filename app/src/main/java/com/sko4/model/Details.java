@@ -35,7 +35,12 @@ public class Details {
     @SerializedName("url")
     private String url;
     @SerializedName("desc_ru")
-    private String body;
+    private String bodyRu;
+    @SerializedName("desc_en")
+    private String bodyEn;
+    @SerializedName("city")
+    private String city;
+
     private String sum;
 
     public Details(Venue venue) {
@@ -46,20 +51,9 @@ public class Details {
 
     public Details() { /* nothing */ }
 
+    @Nullable
     public String getSum() {
-        if (TextUtils.isEmpty(sum)) {
-            StringBuilder builder = new StringBuilder();
-            if (styles != null && !styles.isEmpty()) {
-                for (Style style : styles) {
-                    if (builder.length() > 0) {
-                        builder.append(", ");
-                    }
-                    builder.append(style.getName());
-                }
-                return builder.toString();
-            }
-        }
-        return sum;
+        return !TextUtils.isEmpty(sum) ? sum : getStylesString();
     }
 
     public String getId() {
@@ -80,6 +74,19 @@ public class Details {
     }
 
     @Nullable
+    public String getStylesString() {
+        if (getStyles().isEmpty()) { return null; }
+        StringBuilder builder = new StringBuilder();
+        for (Style style : getStyles()) {
+            if (builder.length() > 0) {
+                builder.append(", ");
+            }
+            builder.append(style.getName());
+        }
+        return builder.toString();
+    }
+
+    @Nullable
     public String getSquareUrl() {
         if (image == null) { return null; }
         String square = image.getSquare();
@@ -97,7 +104,9 @@ public class Details {
         return builder.toString();
     }
 
-    public String getBody() { return body; }
+    public String getBodyRu() { return bodyRu; }
+
+    public String getBodyEn() { return bodyEn; }
 
     public List<Media> getMedia() { return media; }
 
@@ -106,4 +115,6 @@ public class Details {
     public List<MapInfo> getMapInfo() { return mapInfo; }
 
     public String getUrl() { return url; }
+
+    public String getCity() { return city; }
 }

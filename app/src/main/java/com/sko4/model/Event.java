@@ -23,8 +23,6 @@ public class Event {
     private String file;
     @SerializedName("title")
     private String title;
-    @SerializedName("city")
-    private String city;
     @SerializedName("prices")
     private List<Price> prices;
     @SerializedName("styles")
@@ -67,19 +65,6 @@ public class Event {
 
     public String getName() { return title; }
 
-    public String getStyles() {
-        List<Style> types = getStylesList();
-        if (types == null || types.isEmpty()) { return ""; }
-        StringBuilder builder = new StringBuilder();
-        for (Style style : types) {
-            if (builder.length() > 0) {
-                builder.append(" | ");
-            }
-            builder.append(style.getName());
-        }
-        return builder.toString();
-    }
-
     public String getUrl() {
         return "http://files.sko4.com"
                 + getPath()
@@ -89,10 +74,6 @@ public class Event {
     }
 
     public String getId() { return id; }
-
-    public String getVenueId() {
-        return venues.get(0).getId();
-    }
 
     public String getVendor() {
         StringBuilder builder = new StringBuilder();
@@ -172,8 +153,6 @@ public class Event {
         }
         return builder.toString();
     }
-
-    public String getCity() { return city; }
 
     public void setId(String id) {
         this.id = id;

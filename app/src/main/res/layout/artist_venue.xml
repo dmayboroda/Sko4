@@ -25,19 +25,18 @@
             >
 
            <RelativeLayout
+               android:id="@+id/data_header"
                android:layout_width="match_parent"
                android:layout_height="200dp"
                android:background="?attr/colorPrimary"
-               android:padding="50dp"
-               android:clipChildren="false"
-               android:clipToPadding="false"
-               app:layout_collapseMode="parallax"
+               android:padding="45dp"
+               app:layout_collapseMode="pin"
                >
 
                <ImageView
                    android:id="@+id/data_pic"
-                   android:layout_width="88dp"
-                   android:layout_height="88dp"
+                   android:layout_width="90dp"
+                   android:layout_height="90dp"
                    android:scaleType="centerCrop"
                    />
 
@@ -48,7 +47,7 @@
                    android:layout_toRightOf="@+id/data_pic"
                    android:ellipsize="end"
                    android:maxLines="1"
-                   android:textSize="18sp"
+                   android:textSize="20sp"
                    android:paddingLeft="10dp"
                    android:textColor="@color/primaryDark"
                    />
@@ -59,7 +58,7 @@
                    android:layout_height="wrap_content"
                    android:ellipsize="end"
                    android:maxLines="1"
-                   android:textSize="15sp"
+                   android:textSize="16sp"
                    android:layout_toRightOf="@+id/data_pic"
                    android:layout_below="@+id/data_name"
                    android:paddingLeft="10dp"
@@ -67,12 +66,12 @@
                    />
 
                <TextView
-                   android:id="@+id/data_url"
+                   android:id="@+id/data_plus"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:ellipsize="end"
                    android:maxLines="1"
-                   android:textSize="15sp"
+                   android:textSize="16sp"
                    android:layout_toRightOf="@+id/data_pic"
                    android:layout_below="@+id/data_about"
                    android:paddingLeft="10dp"
@@ -88,6 +87,7 @@
                 android:elevation="8dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
                 >
 
             </android.support.v7.widget.Toolbar>

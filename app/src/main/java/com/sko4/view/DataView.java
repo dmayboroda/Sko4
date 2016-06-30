@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,7 +35,8 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
     @Bind(R.id.data_pic)    ImageView picture;
     @Bind(R.id.data_name)   TextView name;
     @Bind(R.id.data_about)  TextView about;
-    @Bind(R.id.data_url)    TextView url;
+    @Bind(R.id.data_plus)   TextView plus;
+    @Bind(R.id.data_header) RelativeLayout header;
 
     public DataView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -55,7 +57,7 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
         super.onFinishInflate();
         name.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_REGULAR));
         about.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
-        url.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
+        plus.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
         String tit  = getActivity().getName();
         String sum  = getActivity().getSum();
         name.setText(tit);
@@ -80,10 +82,13 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
             return;
         }
         Details details = dataObject.getData();
+        String bodyRu = details.getBodyRu();
+        String bodyEn = details.getBodyEn();
+        descCard.bind(!TextUtils.isEmpty(bodyRu) ? bodyRu : bodyEn);
         mapCard.bind(details.getMapInfo());
-        descCard.bind(details.getBody());
-        String square = details.getSquareUrl();
-        String web    = details.getUrl();
+        String square   = details.getImageByPath();
+        String city     = details.getCity();
+        String url      = details.getUrl();
         if (!TextUtils.isEmpty(square)) {
             Glide.with(getContext())
                     .load(square)
@@ -93,10 +98,13 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
         } else {
             picture.setVisibility(INVISIBLE);
         }
-        if (!TextUtils.isEmpty(web)) {
-            url.setText(web);
+
+        if (!TextUtils.isEmpty(url)) {
+            plus.setText(url);
+        } else if (!TextUtils.isEmpty(city)) {
+            plus.setText(city);
         } else {
-            url.setVisibility(GONE);
+            plus.setVisibility(GONE);
         }
         switcher.setDisplayedChildId(R.id.data_view);
     }
@@ -105,8 +113,10 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
     public void onRevealChange(int state) {
         if (state == RevealView.FINISHED) {
             switcher.setVisibility(VISIBLE);
+            header.setVisibility(VISIBLE);
         } else {
             switcher.setVisibility(INVISIBLE);
+            header.setVisibility(INVISIBLE);
         }
     }
 }
