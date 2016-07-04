@@ -70,7 +70,7 @@ public class EventActivity extends ToolbarActivity {
         toolbarLayout.setStatusBarScrimColor(primary);
         toolbarLayout.setTitle(title);
         Glide.with(this).load(url)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e,

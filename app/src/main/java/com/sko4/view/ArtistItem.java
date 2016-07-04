@@ -68,7 +68,7 @@ public class ArtistItem extends RelativeLayout {
                 Glide.with(getContext())
                         .load(squareUrl)
                         .transform(new CircleTransform(getContext()))
-                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(avatar);
                 avatar.setVisibility(VISIBLE);
             }

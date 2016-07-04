@@ -111,7 +111,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             }
             Glide.with(itemView.getContext())
                     .load(bindable.getUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(preview);
             DateTime time = bindable.getStartDate();
             if (time != null) {

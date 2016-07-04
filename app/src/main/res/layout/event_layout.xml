@@ -30,7 +30,7 @@
             <ImageView
                 android:id="@+id/toolbar_image"
                 android:layout_width="match_parent"
-                android:layout_height="275dp"
+                android:layout_height="270dp"
                 android:scaleType="centerCrop"
                 android:tint="@color/tint_card"
                 android:tintMode="src_atop"

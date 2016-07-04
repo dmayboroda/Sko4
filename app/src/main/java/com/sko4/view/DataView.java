@@ -93,7 +93,7 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
             Glide.with(getContext())
                     .load(square)
                     .transform(new CircleTransform(getContext()))
-                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(picture);
         } else {
             picture.setVisibility(INVISIBLE);
