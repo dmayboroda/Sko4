@@ -15,6 +15,9 @@ import com.sko4.Utils;
 import com.sko4.api.ApiService;
 import com.sko4.model.DataObject;
 import com.sko4.model.Details;
+import com.sko4.model.Media;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -37,6 +40,7 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
     @Bind(R.id.data_about)  TextView about;
     @Bind(R.id.data_plus)   TextView plus;
     @Bind(R.id.data_header) RelativeLayout header;
+    @Bind(R.id.media_stack) MediaStack mediaStack;
 
     public DataView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -106,6 +110,9 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
         } else {
             plus.setVisibility(GONE);
         }
+
+        List<Media> mediaList = details.getMedia();
+        mediaStack.bind(mediaList);
         switcher.setDisplayedChildId(R.id.data_view);
     }
 
