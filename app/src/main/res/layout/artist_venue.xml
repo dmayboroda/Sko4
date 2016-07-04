@@ -143,7 +143,12 @@
 
                 <include layout="@layout/desc_view"/>
 
-                <include layout="@layout/media_stack"/>
+                <LinearLayout
+                    android:id="@+id/media_stack"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
 
                 <!-- event list -->
 

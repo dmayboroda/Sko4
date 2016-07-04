@@ -3,7 +3,9 @@ package com.sko4.view;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -40,13 +42,16 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
     @Bind(R.id.data_about)  TextView about;
     @Bind(R.id.data_plus)   TextView plus;
     @Bind(R.id.data_header) RelativeLayout header;
-    @Bind(R.id.media_stack) MediaStack mediaStack;
+    @Bind(R.id.media_stack) LinearLayout mediaStack;
+
+    private LayoutInflater inflater;
 
     public DataView(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (!isInEditMode()) {
             component.inject(this);
         }
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -112,7 +117,15 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
         }
 
         List<Media> mediaList = details.getMedia();
-        mediaStack.bind(mediaList);
+        if (mediaList != null && !mediaList.isEmpty()) {
+            for (Media media : mediaList) {
+                MediaView mediaView = (MediaView) inflater.inflate(R.layout.media_view, null);
+                mediaView.bind(media);
+                mediaStack.addView(mediaView);
+            }
+        } else {
+            mediaStack.setVisibility(GONE);
+        }
         switcher.setDisplayedChildId(R.id.data_view);
     }
 
