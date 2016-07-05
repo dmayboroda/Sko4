@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sko4.view.ArtistItem
+<com.sko4.view.StackItem
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,17 +9,17 @@
     >
 
     <ImageView
-        android:id="@+id/artist_avatar"
+        android:id="@+id/item_avatar"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:scaleType="centerCrop"
         />
 
     <TextView
-        android:id="@+id/artist_name"
+        android:id="@+id/item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/artist_avatar"
+        android:layout_toRightOf="@+id/item_avatar"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="18sp"
@@ -27,15 +27,15 @@
         />
 
     <TextView
-        android:id="@+id/artist_style"
+        android:id="@+id/item_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="15sp"
-        android:layout_toRightOf="@+id/artist_avatar"
-        android:layout_below="@+id/artist_name"
+        android:layout_toRightOf="@+id/item_avatar"
+        android:layout_below="@+id/item_name"
         android:paddingLeft="10dp"
         />
 
-</com.sko4.view.ArtistItem>
+</com.sko4.view.StackItem>

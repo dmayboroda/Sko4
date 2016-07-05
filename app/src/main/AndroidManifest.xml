@@ -30,7 +30,7 @@
         <activity
             android:name=".DetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.TransparentActivity"
+            android:theme="@style/Theme.Base.TransparentActivity"
             android:label="@string/app_name"
             />
 

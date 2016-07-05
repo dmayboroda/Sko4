@@ -15,19 +15,20 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * artists stack in event view
  * Created by Mayboroda on 6/7/16.
  */
-public class ArtistStack extends CardView {
+public class ItemStack extends CardView {
 
-    @Bind(R.id.artist_container)    LinearLayout container;
-    @Bind(R.id.artists_all)         TextView showAll;
+    @Bind(R.id.items_container) LinearLayout container;
+    @Bind(R.id.show_all)        TextView showAll;
 
     private LayoutInflater inflater;
 
-    public ArtistStack(Context context, AttributeSet attrs) {
+    public ItemStack(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -39,26 +40,31 @@ public class ArtistStack extends CardView {
         showAll.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
-    public void bind(List<Details> artists) {
-        if (artists.isEmpty()) {
+    public void bind(List<Details> details, boolean isArtist) {
+        if (details.isEmpty()) {
             setVisibility(GONE);
             return;
         }
 
-        int size = 3;
-        if (artists.size() > size) {
-            showAll.setVisibility(VISIBLE);
-        } else {
-            size = artists.size();
-            showAll.setVisibility(GONE);
-        }
+        int maxsize = 5;
+        int listSize = details.size();
+        int size = listSize >= maxsize ? maxsize : listSize;
+        showAll.setVisibility(listSize > maxsize ? VISIBLE : GONE);
+
+
         for (int i = 0; i < size; i++) {
-            ArtistItem artistItem = (ArtistItem)inflater
-                    .inflate(R.layout.artist_info, null);
-            artistItem.bind(artists.get(i));
-            container.addView(artistItem);
+            StackItem stackItem = (StackItem)inflater
+                    .inflate(R.layout.item_info, null);
+            stackItem.setArtistEnable(isArtist);
+            stackItem.bind(details.get(i));
+            container.addView(stackItem);
         }
 
         setVisibility(VISIBLE);
+    }
+
+    @OnClick(R.id.show_all)
+    public void showAll() {
+
     }
 }

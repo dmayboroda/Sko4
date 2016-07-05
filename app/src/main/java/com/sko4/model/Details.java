@@ -41,6 +41,12 @@ public class Details {
     @SerializedName("city")
     private String city;
 
+    /** for events stack */
+    @SerializedName("title")
+    private String title;
+    @SerializedName("venues")
+    private List<Venue> venues;
+
     private String sum;
 
     public Details(Venue venue) {
@@ -117,4 +123,18 @@ public class Details {
     public String getUrl() { return url; }
 
     public String getCity() { return city; }
+
+    public String getTitle() { return TextUtils.isEmpty(title) ? name : title; }
+
+    public String getAdditional() {
+        return TextUtils.isEmpty(getStylesString()) ? getVenueString() : getStylesString();
+    }
+
+    public String getVenueString() {
+        return !getVenues().isEmpty() ? venues.get(0).getName() : "";
+    }
+
+    public List<Venue> getVenues() {
+        return venues == null ? Collections.<Venue>emptyList() : venues;
+    }
 }

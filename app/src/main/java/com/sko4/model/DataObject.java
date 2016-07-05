@@ -15,7 +15,7 @@ public class DataObject {
     @SerializedName("photos")
     private List<Photo> photos;
     @SerializedName("events")
-    private List<Event> events;
+    private List<Details> events;
 
     public DataObject(Details data) {
         this.data = data;
@@ -27,5 +27,5 @@ public class DataObject {
 
     public List<Photo> getPhotos() { return photos; }
 
-    public List<Event> getEvents() { return events; }
+    public List<Details> getEvents() { return events; }
 }

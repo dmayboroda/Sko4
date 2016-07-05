@@ -99,7 +99,7 @@
 
                 <include layout="@layout/desc_view"/>
 
-                <include layout="@layout/artist_stack"/>
+                <include layout="@layout/item_stack"/>
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

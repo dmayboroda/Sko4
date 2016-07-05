@@ -56,6 +56,7 @@ public class DetailsActivity extends ToolbarActivity {
         toolbarLayout.setExpandedTitleColor(transparent);
         toolbarLayout.setCollapsedTitleTextColor(primaryDark);
         toolbarLayout.setContentScrimColor(primary);
+        toolbarLayout.setStatusBarScrimColor(primary);
         toolbarLayout.setTitle(getName());
         revealView.setOnRevealChange(dataView);
         if (savedInstanceState == null) {

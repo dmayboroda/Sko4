@@ -43,6 +43,7 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
     @Bind(R.id.data_plus)   TextView plus;
     @Bind(R.id.data_header) RelativeLayout header;
     @Bind(R.id.media_stack) LinearLayout mediaStack;
+    @Bind(R.id.items_stack) ItemStack itemStack;
 
     private LayoutInflater inflater;
 
@@ -126,6 +127,9 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
         } else {
             mediaStack.setVisibility(GONE);
         }
+
+        List<Details> events = dataObject.getEvents();
+        itemStack.bind(events, false);
         switcher.setDisplayedChildId(R.id.data_view);
     }
 
