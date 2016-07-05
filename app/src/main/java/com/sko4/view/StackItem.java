@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sko4.DetailsActivity;
+import com.sko4.EventActivity;
 import com.sko4.R;
 import com.sko4.Utils;
 import com.sko4.model.Details;
@@ -81,14 +82,14 @@ public class StackItem extends RelativeLayout {
                 setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int[] screenxy = new int[2];
-                        view.getLocationOnScreen(screenxy);
-                        screenxy[0] += view.getWidth() / 2;
                         if (isArtist) {
+                            int[] screenxy = new int[2];
+                            view.getLocationOnScreen(screenxy);
+                            screenxy[0] += view.getWidth() / 2;
                             DetailsActivity.startArtistsActivity(getContext(),screenxy, details);
                             ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
                         } else {
-                            //start event activity
+                            EventActivity.openEventActivity(getContext(), details);
                         }
                     }
                 });

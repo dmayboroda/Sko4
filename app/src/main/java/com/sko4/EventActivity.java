@@ -1,5 +1,6 @@
 package com.sko4;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.sko4.model.Details;
 import com.sko4.model.Event;
 
 import butterknife.Bind;
@@ -46,6 +48,14 @@ public class EventActivity extends ToolbarActivity {
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(activity, transitionImage, IMAGE_EXTRA);
         ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle());
+    }
+
+    public static void openEventActivity(Context activity, Details details) {
+        Intent intent = new Intent(activity, EventActivity.class);
+        intent.putExtra(ID_EXTRA, details.getId());
+        intent.putExtra(TITLE_EXTRA, details.getTitle());
+        intent.putExtra(IMAGE_EXTRA, details.getImageByPath());
+        activity.startActivity(intent);
     }
 
     @Bind(R.id.app_bar_layout)  AppBarLayout appBarLayout;
