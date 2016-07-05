@@ -55,8 +55,7 @@ public class ItemStack extends CardView {
         for (int i = 0; i < size; i++) {
             StackItem stackItem = (StackItem)inflater
                     .inflate(R.layout.item_info, null);
-            stackItem.setArtistEnable(isArtist);
-            stackItem.bind(details.get(i));
+            stackItem.bind(details.get(i), isArtist);
             container.addView(stackItem);
         }
 

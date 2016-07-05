@@ -29,8 +29,6 @@ public class StackItem extends RelativeLayout {
     @Bind(R.id.item_name)       TextView name;
     @Bind(R.id.item_details)    TextView plus;
 
-    private boolean isArtist = false;
-
     public StackItem(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -43,13 +41,11 @@ public class StackItem extends RelativeLayout {
         plus.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
-    public void setArtistEnable(boolean isArtist) {
-        this.isArtist = isArtist;
-    }
+    public void bind(final Details details, final boolean isArtist) {
 
-    public void bind(final Details details) {
-
-        String additional = details.getAdditional();
+        String styles = details.getStylesString();
+        String venue = details.getVenueString();
+        String additional = isArtist ? styles: venue;
         String title      = details.getTitle();
         String squareUrl  = details.getImageByPath();
 

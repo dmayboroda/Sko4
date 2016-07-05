@@ -129,7 +129,7 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
         }
 
         List<Details> events = dataObject.getEvents();
-        itemStack.bind(events, false);
+        itemStack.bind(events, !getActivity().isArtist());
         switcher.setDisplayedChildId(R.id.data_view);
     }
 
