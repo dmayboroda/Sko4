@@ -1,5 +1,7 @@
 package com.sko4;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,6 +26,7 @@ public abstract class ToolbarActivity extends BaseActivity {
     protected int primaryDark;
     protected int accent;
     protected int transparent;
+    private Drawable upArrow;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,12 +41,16 @@ public abstract class ToolbarActivity extends BaseActivity {
             primaryDark = getResources().getColor(R.color.primaryDark, null);
             accent = getResources().getColor(R.color.accent, null);
             transparent = getResources().getColor(android.R.color.transparent, null);
+            upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_black_18dp, null);
         } else {
             primary = getResources().getColor(R.color.primary);
             primaryDark = getResources().getColor(R.color.primaryDark);
             accent = getResources().getColor(R.color.accent);
             transparent = getResources().getColor(android.R.color.transparent);
+            upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_black_18dp);
         }
+        upArrow.setColorFilter(primaryDark, PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
     }
 
     public abstract int layoutId();
