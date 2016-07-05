@@ -36,9 +36,9 @@ public class EventActivity extends ToolbarActivity {
     private static final String TITLE_EXTRA = "tlt_extra";
     private static final String ID_EXTRA    = "id_extra";
 
-    public static void navigate(AppCompatActivity activity,
-                                View transitionImage,
-                                Event event) {
+    public static void openEventActivity(AppCompatActivity activity,
+                                         View transitionImage,
+                                         Event event) {
         Intent intent = new Intent(activity, EventActivity.class);
         intent.putExtra(IMAGE_EXTRA,    event.getUrl());
         intent.putExtra(TITLE_EXTRA,    event.getName());

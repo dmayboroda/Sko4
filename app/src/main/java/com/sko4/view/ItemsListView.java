@@ -80,6 +80,6 @@ public class ItemsListView extends RxCoordinator<EventsWrapper, MainActivity> im
 
     @Override
     public void onChoose(View view, Event event) {
-        EventActivity.navigate(getActivity(), view, event);
+        EventActivity.openEventActivity(getActivity(), view, event);
     }
 }
