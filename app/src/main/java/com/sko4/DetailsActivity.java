@@ -87,7 +87,7 @@ public class DetailsActivity extends ToolbarActivity {
     }
 
     public boolean isArtist() {
-        return getIntent().getBooleanExtra(IS_ARTIST, true);
+        return getIntent().getBooleanExtra(IS_ARTIST, false);
     }
 
     public String getDataId() {

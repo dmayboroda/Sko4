@@ -128,9 +128,9 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
         } else {
             mediaStack.setVisibility(GONE);
         }
-
         List<Details> events = dataObject.getEvents();
-        itemStack.bind(events, false);
+        boolean isArtist = getActivity().isArtist();
+        itemStack.bind(events, !isArtist);
         switcher.setDisplayedChildId(R.id.data_view);
     }
 

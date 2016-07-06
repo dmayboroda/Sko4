@@ -24,11 +24,14 @@ import butterknife.ButterKnife;
  * Artist item on event view.
  * Created by Mayboroda on 6/7/16.
  */
-public class StackItem extends RelativeLayout {
+public class StackItem extends RelativeLayout implements View.OnClickListener{
 
     @Bind(R.id.item_avatar)     ImageView avatar;
     @Bind(R.id.item_name)       TextView name;
     @Bind(R.id.item_details)    TextView plus;
+
+    private Details details;
+    private boolean isArtist;
 
     public StackItem(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -40,15 +43,18 @@ public class StackItem extends RelativeLayout {
         ButterKnife.bind(this);
         name.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
         plus.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
+        setOnClickListener(this);
     }
 
     public void bind(final Details details, final boolean isArtist) {
 
-        String styles = details.getStylesString();
-        String venue = details.getVenueString();
-        String additional = isArtist ? styles: venue;
-        String title      = details.getTitle();
-        String squareUrl  = details.getImageByPath();
+        this.details = details;
+        this.isArtist = isArtist;
+        String styles       = details.getStylesString();
+        String venue        = details.getVenueString();
+        String additional   = isArtist ? styles: venue;
+        String title        = details.getTitle();
+        String squareUrl    = details.getImageByPath();
 
         if (TextUtils.isEmpty(additional)
             && TextUtils.isEmpty(title)
@@ -76,25 +82,20 @@ public class StackItem extends RelativeLayout {
             } else {
                 plus.setText(additional);
             }
-
-            final String id = details.getId();
-            if (!TextUtils.isEmpty(id)) {
-                setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (isArtist) {
-                            int[] screenxy = new int[2];
-                            view.getLocationOnScreen(screenxy);
-                            screenxy[0] += view.getWidth() / 2;
-                            DetailsActivity.startArtistsActivity(getContext(),screenxy, details);
-                            ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
-                        } else {
-                            EventActivity.openEventActivity(getContext(), details);
-                        }
-                    }
-                });
-            }
         }
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (isArtist) {
+            int[] screenxy = new int[2];
+            view.getLocationOnScreen(screenxy);
+            screenxy[0] += view.getWidth() / 2;
+            DetailsActivity.startArtistsActivity(getContext(),screenxy, details);
+            ((AppCompatActivity)getContext()).overridePendingTransition(0,0);
+        } else {
+            EventActivity.openEventActivity(getContext(), details);
+        }
     }
 }
