@@ -41,13 +41,13 @@ public abstract class ToolbarActivity extends BaseActivity {
             primaryDark = getResources().getColor(R.color.primaryDark, null);
             accent = getResources().getColor(R.color.accent, null);
             transparent = getResources().getColor(android.R.color.transparent, null);
-            upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_black_18dp, null);
+            upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp, null);
         } else {
             primary = getResources().getColor(R.color.primary);
             primaryDark = getResources().getColor(R.color.primaryDark);
             accent = getResources().getColor(R.color.accent);
             transparent = getResources().getColor(android.R.color.transparent);
-            upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_black_18dp);
+            upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp);
         }
         upArrow.setColorFilter(primaryDark, PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
