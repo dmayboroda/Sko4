@@ -40,7 +40,7 @@ public class ItemStack extends CardView {
         showAll.setTypeface(Utils.typeface(getContext(), Utils.ROBOTO_LIGHT));
     }
 
-    public void bind(List<Details> details, boolean isArtist) {
+    public void bind(List<Details> details, OnClickListener onClickListener) {
         if (details.isEmpty()) {
             setVisibility(GONE);
             return;
@@ -55,7 +55,8 @@ public class ItemStack extends CardView {
         for (int i = 0; i < size; i++) {
             StackItem stackItem = (StackItem)inflater
                     .inflate(R.layout.item_info, null);
-            stackItem.bind(details.get(i), isArtist);
+            stackItem.setTag(details.get(i));
+            stackItem.bind(details.get(i), onClickListener);
             container.addView(stackItem);
         }
 

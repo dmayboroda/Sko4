@@ -8,9 +8,11 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.sko4.DetailsActivity;
 import com.sko4.EventActivity;
 import com.sko4.R;
 import com.sko4.api.ApiService;
+import com.sko4.model.Details;
 import com.sko4.model.Event;
 import com.sko4.model.EventData;
 
@@ -70,7 +72,17 @@ public class EventView extends RxCoordinator<EventData, EventActivity> {
         eventInfo.bind(event);
         descCard.bind(event.getBody());
         mapCard.bind(event.getMapInfo());
-        itemStack.bind(event.getArtists(), true);
+        itemStack.bind(event.getArtists(), new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Details details = (Details) view.getTag();
+                int[] screenxy = new int[2];
+                view.getLocationOnScreen(screenxy);
+                screenxy[0] += view.getWidth() / 2;
+                DetailsActivity.startArtistsActivity(getContext(),screenxy, details);
+                getActivity().overridePendingTransition(0,0);
+            }
+        });
 
         String tickets = event.getTickets();
         if (TextUtils.isEmpty(tickets)) {

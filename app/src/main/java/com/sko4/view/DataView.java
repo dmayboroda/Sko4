@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sko4.DetailsActivity;
+import com.sko4.EventActivity;
 import com.sko4.R;
 import com.sko4.Utils;
 import com.sko4.api.ApiService;
@@ -129,8 +131,22 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
             mediaStack.setVisibility(GONE);
         }
         List<Details> events = dataObject.getEvents();
-        boolean isArtist = getActivity().isArtist();
-        itemStack.bind(events, !isArtist);
+        final boolean isArtist = getActivity().isArtist();
+        itemStack.bind(events, new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Details details = (Details) view.getTag();
+                if (isArtist) {
+                    int[] screenxy = new int[2];
+                    view.getLocationOnScreen(screenxy);
+                    screenxy[0] += view.getWidth() / 2;
+                    DetailsActivity.startArtistsActivity(getContext(),screenxy, details);
+                    getActivity().overridePendingTransition(0,0);
+                } else {
+                    EventActivity.openEventActivity(getContext(), details);
+                }
+            }
+        });
         switcher.setDisplayedChildId(R.id.data_view);
     }
 
