@@ -6,4 +6,9 @@
                 <item name="android:windowSharedElementsUseOverlay">false</item>
         </style>
 
+        <style name="Theme.Base.TransparentActivity" parent="TransparentActivity">
+                <item name="android:statusBarColor">@color/plus_color</item>
+                <item name="android:windowBackground">@android:color/transparent</item>
+                <item name="android:windowIsTranslucent">true</item>
+        </style>
 </resources>

@@ -21,7 +21,9 @@
         <item name="rippleColor">@android:color/white</item>
     </style>
 
-    <style name="Theme.Base.TransparentActivity">
+    <style name="Theme.Base.TransparentActivity" parent="TransparentActivity"/>
+
+    <style name="TransparentActivity" parent="AppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
