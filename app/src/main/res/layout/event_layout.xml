@@ -25,6 +25,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
             >
 
             <ImageView
