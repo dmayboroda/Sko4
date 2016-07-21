@@ -2,11 +2,6 @@
 Sko4.com android application source code
 Application created with Material design.
 
-![All events](screenshots/Screenshot_20160715-225535.png){width=460px height=320px}
-![Event view](screenshots/Screenshot_20160721-153159.png){width=460px height=320px}
-![Artist view](screenshots/Screenshot_20160721-153318.png){width=460px height=320px}
-![Venue view](screenshots/Screenshot_20160721-153349.png){width=460px height=320px}
-
 # Libraries
 * [Dagger 2](https://google.github.io/dagger/)
 * [Retrofit](https://square.github.io/retrofit/)
