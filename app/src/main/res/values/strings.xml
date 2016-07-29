@@ -11,6 +11,7 @@
     <string name="show_all">Показать всё</string>
     <string name="today">Сегодня</string>
     <string name="ok">Ok</string>
+    <string name="share">Поделиться</string>
     <!-- DEBUG KEY-->
     <string name="map_key">AIzaSyCSrLG7vt2KC1OjNRt-yLeQ8tPKzZndPug</string>
 </resources>
