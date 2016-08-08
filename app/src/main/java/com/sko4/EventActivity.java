@@ -110,7 +110,7 @@ public class EventActivity extends ToolbarActivity {
 
     @Override
     public void share() {
-        
+
     }
 
     public String getId() {

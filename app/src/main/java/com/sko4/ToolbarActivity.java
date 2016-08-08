@@ -59,6 +59,7 @@ public abstract class ToolbarActivity extends BaseActivity {
                 onBackPressed();
                 return true;
             case R.id.share:
+                share();
                 return true;
         }
         return super.onOptionsItemSelected(item);
