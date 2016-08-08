@@ -40,7 +40,9 @@ public abstract class ToolbarActivity extends BaseActivity {
         accent = ContextCompat.getColor(this, R.color.accent);
         transparent = ContextCompat.getColor(this, android.R.color.transparent);
         Drawable upArrow = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_black_24dp);
+        Drawable share   = ContextCompat.getDrawable(this, R.drawable.ic_share_black_24dp);
         upArrow.setColorFilter(primaryDark, PorterDuff.Mode.SRC_ATOP);
+        share.setColorFilter(primaryDark, PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
     }
 

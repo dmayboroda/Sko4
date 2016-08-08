@@ -65,6 +65,6 @@ public class ItemStack extends CardView {
 
     @OnClick(R.id.show_all)
     public void showAll() {
-
+        //TODO show alert with list of details items.
     }
 }
