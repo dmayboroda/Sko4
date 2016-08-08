@@ -86,6 +86,11 @@ public class DetailsActivity extends ToolbarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void share() {
+
+    }
+
     public boolean isArtist() {
         return getIntent().getBooleanExtra(IS_ARTIST, false);
     }

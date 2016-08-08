@@ -108,6 +108,11 @@ public class EventActivity extends ToolbarActivity {
     @Override
     public int layoutId() { return R.layout.event_layout; }
 
+    @Override
+    public void share() {
+        
+    }
+
     public String getId() {
         return getIntent().getStringExtra(ID_EXTRA);
     }
