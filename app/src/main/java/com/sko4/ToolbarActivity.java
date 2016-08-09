@@ -1,5 +1,6 @@
 package com.sko4;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import butterknife.ButterKnife;
  * Created by Mayboroda on 6/30/16.
  */
 public abstract class ToolbarActivity extends BaseActivity {
+
+    public static final String SHARE_STRING = "http://sko4.com/events/ukraine/kiev";
 
     @Bind(R.id.toolbar)             Toolbar toolbar;
     @Bind(R.id.collapsing_toolbar)  CollapsingToolbarLayout toolbarLayout;
@@ -73,7 +76,12 @@ public abstract class ToolbarActivity extends BaseActivity {
         return true;
     }
 
-    public abstract void share();
+    public void share() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, SHARE_STRING);
+        intent.setType("text/plain");
+        startActivity(intent);
+    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent motionEvent) {
