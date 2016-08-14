@@ -21,14 +21,14 @@ import butterknife.OnClick;
  * artists stack in event view
  * Created by Mayboroda on 6/7/16.
  */
-public class ItemStack extends CardView {
+public class ItemsStack extends CardView {
 
     @Bind(R.id.items_container) LinearLayout container;
     @Bind(R.id.show_all)        TextView showAll;
 
     private LayoutInflater inflater;
 
-    public ItemStack(Context context, AttributeSet attrs) {
+    public ItemsStack(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

@@ -45,7 +45,7 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
     @Bind(R.id.data_plus)   TextView plus;
     @Bind(R.id.data_header) RelativeLayout header;
     @Bind(R.id.media_stack) LinearLayout mediaStack;
-    @Bind(R.id.items_stack) ItemStack itemStack;
+    @Bind(R.id.items_stack) ItemsStack itemsStack;
 
     private LayoutInflater inflater;
 
@@ -132,7 +132,7 @@ public class DataView extends RxCoordinator<DataObject, DetailsActivity>
         }
         List<Details> events = dataObject.getEvents();
         final boolean isArtist = getActivity().isArtist();
-        itemStack.bind(events, new OnClickListener() {
+        itemsStack.bind(events, new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Details details = (Details) view.getTag();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sko4.view.ItemStack
+<com.sko4.view.ItemsStack
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/items_stack"
@@ -39,4 +39,4 @@
             android:background="@drawable/ripple_selector"
             />
     </LinearLayout>
-</com.sko4.view.ItemStack>
+</com.sko4.view.ItemsStack>

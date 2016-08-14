@@ -34,7 +34,7 @@ public class EventView extends RxCoordinator<EventData, EventActivity> {
     @Bind(R.id.map_card)            MapCard mapCard;
     @Bind(R.id.desc_card)           DescCard descCard;
     @Bind(R.id.event_fab)           FloatingActionButton actionButton;
-    @Bind(R.id.items_stack)         ItemStack itemStack;
+    @Bind(R.id.items_stack)         ItemsStack itemsStack;
 
     public EventView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -72,7 +72,7 @@ public class EventView extends RxCoordinator<EventData, EventActivity> {
         eventInfo.bind(event);
         descCard.bind(event.getBody());
         mapCard.bind(event.getMapInfo());
-        itemStack.bind(event.getArtists(), new OnClickListener() {
+        itemsStack.bind(event.getArtists(), new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Details details = (Details) view.getTag();
