@@ -57,12 +57,12 @@ public class ItemsStack extends CardView {
                 }).create();
     }
 
-    public void bind(List<Details> details, OnClickListener onClickListener) {
+    public void bind(List<Details> details, OnClickListener listener) {
         if (details.isEmpty()) {
             setVisibility(GONE);
             return;
         }
-        StackAdapter stackAdapter = new StackAdapter(details, onClickListener);
+        StackAdapter stackAdapter = new StackAdapter(details, listener);
         alertView.setAdapter(stackAdapter);
         int maxsize = 5;
         int listSize = details.size();
@@ -73,7 +73,7 @@ public class ItemsStack extends CardView {
             StackItem stackItem = (StackItem)inflater
                     .inflate(R.layout.item_info, null);
             stackItem.setTag(details.get(i));
-            stackItem.bind(details.get(i), onClickListener);
+            stackItem.bind(details.get(i), listener);
             container.addView(stackItem);
         }
 

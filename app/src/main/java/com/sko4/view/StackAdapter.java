@@ -17,12 +17,11 @@ import java.util.List;
 public class StackAdapter extends RecyclerView.Adapter<StackAdapter.ViewHolder> {
 
     private List<Details> detailsList = Collections.emptyList();
-    private View.OnClickListener clickListener;
+    private View.OnClickListener listener;
 
-    public StackAdapter(List<Details> detailsList,
-                        View.OnClickListener clickListener) {
+    public StackAdapter(List<Details> detailsList, View.OnClickListener listener) {
         this.detailsList = detailsList;
-        this.clickListener = clickListener;
+        this.listener = listener;
     }
 
     @Override
@@ -50,7 +49,8 @@ public class StackAdapter extends RecyclerView.Adapter<StackAdapter.ViewHolder> 
         }
 
         public void bind(Details details){
-            itemView.bind(details, clickListener);
+            itemView.setTag(details);
+            itemView.bind(details, listener);
         }
     }
 }
