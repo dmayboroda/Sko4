@@ -3,6 +3,7 @@ package com.sko4.di.module;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.sko4.BuildConfig;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -46,7 +47,9 @@ public final class ApiModule {
                                    Executor executor,
                                    OkHttpClient client) {
         return new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setLogLevel(BuildConfig.DEBUG
+                        ? RestAdapter.LogLevel.FULL
+                        : RestAdapter.LogLevel.NONE)
                 .setClient(new OkClient(client))
                 .setConverter(converter)
                 .setEndpoint(endpoint)
